@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!--Google Icons-->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" href="assets/images/spotify_icon.png" type="image/icon type">
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+    <title>Results</title>
+</head>
+  <body>
+    <div class="main">
+      <!----------------------- Sidebar -------------------->
+      <div class="row">
+        <div class="col-6 d-none col-md-3 d-md-block">
+          <div class="sidebar">
+            <div class="nav">
+              <div class="nav-option" style="opacity: 1">
+                <i class="fa-solid fa-house"></i>
+                <a href="/">Home</a>
+              </div>
+              <div class="nav-option" id="search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <a href="#">Search</a>
+              </div>
+            </div>
+            <div class="library">
+              <div class="option">
+                <div class="lib-option nav-option">
+                  <img src="./assets/library_icon.png" />
+                  <a href="#">Your library</a>
+                </div>
+                <div class="icons">
+                  <i class="fa-sharp fa-solid fa-plus"></i>
+                  <i class="fa-sharp fa-solid fa-arrow-right"></i>
+                </div>
+              </div>
+              <div class="lib-box">
+                <div class="box">
+                  <p class="box-p1">Create your first playlist</p>
+                  <p class="box-p2">It's easy, we'll help you</p>
+                  <button class="badge">Create Playlist</button>
+                </div>
+                <div class="box">
+                  <p class="box-p1">Let's find some podcasts to follow</p>
+                  <p class="box-p2">We'll keep you updated on new episodes</p>
+                  <button class="badge">Browse podcasts</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6 col-md-6">
+          <div class="main-content">
+            <!---------------------- Navbar --------------------->
+            <div class="sticky-nav">
+              <div class="sticky-nav-icons">
+                <img src="./assets/backward_icon.png" />
+                <img src="./assets/forward_icon.png" class="hide" />
+              </div>
+              <div class="sticky-nav-option">
+                <button class="badge nav-item hide" id="premium">
+                  <a
+                    href="https://www.spotify.com/us/premium/"
+                    style="color: #000"
+                    >Explore Premium</a
+                  >
+                </button>
+                <button class="badge nav-item dark-badge">
+                  <i
+                    class="fa-regular fa-circle-down"
+                    style="margin-right: 5px"
+                  ></i
+                  ><a
+                    href="https://www.spotify.com/us/download/android/"
+                    style="color: #fff"
+                    >Install App</a
+                  >
+                </button>
+                <a href="Animatedlogin/login.html" class="ani-log"
+                  ><i class="fa-regular fa-user nav-item"></i
+                ></a>
+                <!-- <i class="fa-solid fa-bars" id="menu"></i> -->
+                <div class="navbar-toggle" id="menu">
+                  <button id="menu-toggle">
+                    <i class="fa-solid fa-list"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <h2>Recently played</h2>
+            <div class="card-container">
+              <div class="card" id="card">
+                <img src="assets/card1img.jpeg" class="card-img" />
+                <span class="btnplay"
+                  ><i class="fa-solid fa-play" id="masterplay"></i
+                ></span>
+                <p class="card-title">Top 50 - Global</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <h2>Trending now near you</h2>
+            <div class="card-container">
+              <div class="card" id="card">
+                <img src="assets/card2img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Mahive sona</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+
+              <div class="card">
+                <img src="assets/card3img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Top 50 - Global</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+
+              <div class="card">
+                <img src="assets/card4img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Varisu title track</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+
+              <div class="card">
+                <img src="assets/card5img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Top 50 - Pop Music</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+
+              <div class="card">
+                <img src="assets/card1img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Top 50 - Soft Music</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <h2>Feature Charts</h2>
+            <div class="card-container">
+              <div class="card">
+                <img src="assets/card7img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Dill Diyan Gallan</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card8img.png" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Jhoom Jo Pathaan</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card9img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Rafta Rafta</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card10img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Pheli Dafa</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card11img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Tum Mile Dill Khile</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <h2>Punjabi Hits</h2>
+            <div class="card-container">
+              <div class="card">
+                <img src="assets/card12img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Brown Munde</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card13img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Snapchat Story</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card14img.jpeg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Suit Punjabi</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card15img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Gypsy</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card16img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Blue Eyes</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <h2>Romantic Songs</h2>
+            <div class="card-container">
+              <div class="card">
+                <img src="assets/card17img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Aadat</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card18img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Dekhte Dekhte</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card19img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Is Qadar</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card20img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Baari</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/card21img.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Nira Ishq</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <h2>English Hits</h2>
+            <div class="card-container">
+              <div class="card">
+                <img src="assets/Alan-Walker-Faded.webp" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Faded</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img
+                  src="assets/Ed_Sheeran_Perfect_Single_cover.jpg"
+                  class="card-img"
+                />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Perfect</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/Babycoverart.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Baby</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/kety.webp" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Wide Awake</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+              <div class="card">
+                <img src="assets/alone.jpg" class="card-img" />
+                <span class="btnplay"><i class="fa-solid fa-play"></i></span>
+                <p class="card-title">Alone</p>
+                <p class="card-info">Your daily updates of most played....</p>
+              </div>
+            </div>
+
+            <br /><br /><br />
+
+            <div class="footer">
+              <div class="line">Copyright &copy;2023 mdaffanasghar</div>
+            </div>
+            <br /><br /><br /><br />
+          </div>
+        </div>
+
+        <div class="col-6 col-md-3">
+          <div class="container">
+            <p>Today Trending .</p>
+            <div class="wrapper">
+              <div class="banner-image"></div>
+              <h6>Dill Diyan Gallan</h6>
+              <p>By Rahat Fateh Ali Khan, .</p>
+              <div class="banner-image2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="music-player">
+        <div class="album">
+          <img src="assets/album_picture.jpeg" class="album-img" />
+          <h6 class="album-daylight">
+            Daylight<br />
+            <p class="album-affan">Affan khan</p>
+          </h6>
+          <img
+            src="assets/album_icon1.png"
+            class="album-img"
+            style="height: 2rem; opacity: 0.9"
+          />
+          <img
+            src="assets/album_icon2.png"
+            class="album-img"
+            style="height: 2.5rem"
+          />
+        </div>
+        <div class="player">
+          <div class="player-controls">
+            <img src="assets/player_icon1.png" class="player-control-icon" />
+            <img src="assets/player_icon2.png" class="player-control-icon" />
+            <img
+              src="assets/player_icon3.png"
+              class="player-control-icon"
+              style="opacity: 1; height: 2rem"
+            />
+            <!-- <i class="fa-solid fa-2x fa-play-circle" id="masterPlay"></i> -->
+            <img src="assets/player_icon4.png" class="player-control-icon" />
+            <img src="assets/player_icon5.png" class="player-control-icon" />
+          </div>
+          <div class="playback-bar">
+            <span class="curr-time">00:00</span>
+            <input
+              type="range"
+              min="0"
+              max="100"
+              step="1"
+              class="progress-bar"
+            />
+            <span class="tot-time">3:33</span>
+          </div>
+        </div>
+        <div class="controls">
+          <!-- <img src="assets/controls_icon1.png" class="controls-icon"> -->
+          <i class="fa-sharp fa-solid fa-music"></i>
+          <img src="assets/controls_icon3.png" class="controls-icons" />
+          <img src="assets/controls_icon4.png" class="controls-icons" />
+          <!-- <img src="assets/controls_icon5.png" class="controls-icons-speaker" /> -->
+          <i class="fa-solid fa-volume-high"></i>
+          <input type="range" step="10" class="vol-bar" />
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="./assets/js/fetch.js"></script>
+    <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/artist.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<div class="container mb-2 p-2 px-4">
+    <ul id="home-btns">
+        <li>
+            <button class="btn">
+                <a href="index.html">
+                    <i class="bi bi-house-door"></i>
+                    <span>Home</span>
+                </a>
+            </button>
+        </li>
+        <li>
+            <button class="btn" id="searchBtn" onclick="toggleSearch()">
+                <i class="bi bi-search"></i>
+                <span>Search</span>
+            </button>
+        </li>
+    </ul>
+</div>
+<div class="container p-0 py-1">
+    <nav class="px-4">
+        <ul id="library-btns">
+            <li>
+                <a href="">
+                    <i class="bi bi-music-note-list"></i>
+                </a>
+                <a href="">
+                    <span>Your Library</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <i class="bi bi-plus"></i>
+                </a>
+                <a href="">
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+        <ul class="navigation-btns">
+            <li><a href="">Playlists</a></li>
+            <li><a href="">Artists</a></li>
+            <li><a href="">Album</a></li>
+        </ul>
+    </nav>
+    <nav id="recent" class="px-2">
+        <ul id="search-btns" class="p-2">
+            <li><a href=""><i class="bi bi-search"></i></a></li>
+            <li>
+                <span>Recents</span>
+                <a href="">
+                    <i class="bi bi-list-ul"></i>
+                </a>
+            </li>
+        </ul>
+        <ul id="recent-playlists">
+            <li>
+                <a href="#">
+                    <img src="assets/images/liked.jpg" alt="liked-songs">
+                    <div>
+                        <div>Liked Songs</div>
+                        <div>Playlist · 676 Songs</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/images/liked.jpg" alt="liked-songs">
+                    <div>
+                        <div>Favourites 2024</div>
+                        <div>Playlist · 132 Songs</div>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <img src="assets/images/liked.jpg" alt="liked-songs">
+                    <div>
+                        <div>Your Episodes</div>
+                        <div>Saved & downloaded Episodes</div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+        <!--ARTISTS ASIDE LIST - Inseriamo qui dinamicamente 20 artisti-->
+        <ul id="recent-artists-aside-list">
+        </ul>
+    </nav>
+</div>
