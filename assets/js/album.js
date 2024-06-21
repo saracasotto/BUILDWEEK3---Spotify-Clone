@@ -1,65 +1,63 @@
+const apiBase = "https://striveschool-api.herokuapp.com/api/deezer/album/";
+let album = null;
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-const api = "https://striveschool-api.herokuapp.com/api/deezer/album/"
-let album = null
-const params = new URLSearchParams(window.location.search)
+document.addEventListener("DOMContentLoaded", async () => {
+    await asideArtist();
+    await albumClick();
+    await getAlbum();
+});
 
-document.addEventListener("DOMContentLoaded", async()=>{
-  await asideArtist()
-  await albumClick()
-}) 
-
-console.log(params)
-
-const id = params.get("id")
-const title = params.get("title")
-const cover = params.get("cover")
-const cover_xl = params.get("cover_xl")
-const tracks = params.get("tracks")
-const release_date = params.get("release_date")
-const name = params.get("name")
-
-getAlbum()
+console.log(params);
 
 async function getAlbum() {
-    const response = await fetch(api)
-    const data = await response.json()
-    console.log(data)
+    try {
+        const response = await fetch(apiBase + id);
+        const data = await response.json();
+        console.log(data);
 
-    let songs = ""
-    tracks.map((track, i) => {
-        songs += `<tr>
-                    <th scope="row">${i + 1}</th>
-                    <td>${track.title}</td>
-                    <td>${track.artist.name}</td>
-                    <td>${track.duration} seconds</td>
-                    <td><audio controls>
-  <source src=${track.preview} type="audio/mp3">
-</audio></td>
-                </tr>`
-                
-    })
+        const { title, cover_xl, release_date, tracks, artist } = data;
 
-    document.getElementById("albumTable").classList.remove("d-none")
-    document.getElementById("tracks").innerHTML = songs
+        document.getElementById("album-cover").src = cover_xl;
+        document.getElementById("card-title-album").innerText = title;
+        document.getElementById("card-text-artist").innerText = artist.name;
 
-    album = `<div class="card mb-3" style="width:100%;">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img src=${cover_xl} class="img-fluid rounded-start" alt="...">
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-      <p class="card-text"><small class="text-body-secondary">Album</small></p>
-        <h1 class="card-title">${title}</h1>
-        <span class="card-text"><small class="text-body-secondary">${name}</small></span>
-        <span class="card-text"><small class="text-body-secondary">• ${release_date}</small></span>
-        <span class="card-text"><small class="text-body-secondary">• ${tracks.length} tracks</small></span>
-        
-      </div>
-    </div>
-  </div>
-</div>`
+        let songs = "";
+        tracks.data.forEach((track, i) => {
+            songs += `<tr>
+                        <th scope="row">${i + 1}</th>
+                        <td><p class="track-title">${track.title}<p>
+                        <p class="artist-name">${track.artist.name}<p></td>
+                        <td><audio controls class="audio-controls">
+                            <source src="${track.preview}" type="audio/mp3"></audio>
+                        </td>
+                        <td>${Math.floor(track.duration / 60)}:${track.duration % 60 < 10 ? '0' : ''}${track.duration % 60}</td>
+                    </tr>`;
+        });
 
-    document.getElementById("searchResults").innerHTML = album
+        document.getElementById("albumTable").classList.remove("d-none");
+        document.getElementById("tracks").innerHTML = songs;
 
+        album = `<div class="card mb-3" style="width:100%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="${cover_xl}" class="img-fluid rounded-start" alt="${title}">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-body-secondary">Album</small></p>
+                        <h1 class="card-title">${title}</h1>
+                        <span class="card-text"><small class="text-body-secondary">${artist.name}</small></span>
+                        <span class="card-text"><small class="text-body-secondary">• ${release_date}</small></span>
+                        <span class="card-text"><small class="text-body-secondary">• ${tracks.data.length} tracks</small></span>
+                    </div>
+                </div>
+            </div>
+        </div>`;
+
+        document.getElementById("searchResults").innerHTML = album;
+    } catch (error) {
+        console.error("Error fetching album data:", error);
+    }
 }
