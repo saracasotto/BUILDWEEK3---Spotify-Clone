@@ -17,10 +17,10 @@ async function albumCards() {
       <a href="#"><img src="assets/images/playbutton.svg" class="overlay-player-btn"></a>
 		</div>
 		<div class="card-body">
-			<a href="./album.html?idalbum=${ALBUM.id}&idartist=${ARTIST.id}">
+			<a href="./album.html?id=${ALBUM.id}">
 			  <h5 class="card-title">${ALBUM.title}</h5>
 			</a>
-			<a href="./album.html?idalbum=${ALBUM.id}&idartist=${ARTIST.id}">
+			<a href="./artist.html?id=${ARTIST.id}">
 			  <p class="card-text">${ARTIST.name}</p>
 			</a>
 		</div>

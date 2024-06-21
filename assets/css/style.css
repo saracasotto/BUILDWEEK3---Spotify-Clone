@@ -709,6 +709,24 @@ audio {
 
 /*ARTIST PAGE*/
 
+#artist-container {
+    height: 300px;
+}
+
+#artist-container .card-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 1em;
+}
+
+#artist-container .card-body h5 {
+    font-size: 5em;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+
 @media (max-width: 1199px) {
 
     aside {
