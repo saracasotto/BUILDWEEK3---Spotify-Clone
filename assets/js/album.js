@@ -29,8 +29,9 @@ async function getAlbum() {
         tracks.data.forEach((track, i) => {
             songs += `<tr>
                         <th scope="row">${i + 1}</th>
-                        <td><p class="track-title">${track.title}<p>
-                        <p class="artist-name">${track.artist.name}<p></td>
+                        <td>
+                        <p class="track-title">${track.title}</p>
+                        <p class="artist-name">${track.artist.name}</p></td>
                         <td><audio controls class="audio-controls">
                             <source src="${track.preview}" type="audio/mp3"></audio>
                         </td>

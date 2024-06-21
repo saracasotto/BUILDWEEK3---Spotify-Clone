@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async()=>{
 
   const params = new URLSearchParams(location.search)
 
-let id = params.get('id')
+let id = params.get('idartist')
 
 params.set('id', id);
 

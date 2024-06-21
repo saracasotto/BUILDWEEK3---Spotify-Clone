@@ -482,6 +482,11 @@ main #dynamic-container header div {
 
 /*ALBUM PAGE*/
 
+#album {
+    background: linear-gradient(180deg, rgba(184,43,43,1) 0%, rgba(18,18,18,1) 49%);
+
+}
+
 #album-card {
     display: flex;
     flex-direction: row;
