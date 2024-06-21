@@ -1,7 +1,8 @@
 const apiBase = "https://striveschool-api.herokuapp.com/api/deezer/album/";
 let album = null;
 const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const id = params.get("idalbum");
+console.log(id);
 
 document.addEventListener("DOMContentLoaded", async () => {
     await asideArtist();
@@ -21,10 +22,8 @@ async function getAlbum() {
 
         document.getElementById("album-cover").src = cover_xl;
         document.getElementById("card-title-album").innerText = title;
-        document.getElementById("card-text-artist").innerText = artist.name;
+        document.getElementById("card-text-artist").innerText = artist.name 
         document.getElementById("card-text2").innerText = " · " + release_date + " · " + tracks.data.length + " tracks";
-
-        
 
         let songs = "";
         tracks.data.forEach((track, i) => {
@@ -40,10 +39,10 @@ async function getAlbum() {
                     </tr>`;
         });
 
-        document.getElementById("albumTable").classList.remove("d-none");
+        
         document.getElementById("tracks").innerHTML = songs;
 
     } catch (error) {
-        console.error("Error fetching album data:", error);
+        console.error("Error fetching album data:", + error);
     }
 }
