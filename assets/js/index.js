@@ -14,6 +14,7 @@ async function albumCards() {
   <div id="albumCard${y}" data-idalbum="${ALBUM.id}" data-idartist="${ARTIST.id}" class="card" onclick="albumClick(this)">
     <div class="card-img-container">
 			<a href="#"><img src="${ALBUM.coverMedium}" class="card-img-top" alt="ALBUM IMG"></a>
+      <a href="#"><img src="assets/images/playbutton.svg" class="overlay-player-btn"></a>
 		</div>
 		<div class="card-body">
 			<a href="./album.html?idalbum=${ALBUM.id}&idartist=${ARTIST.id}">
