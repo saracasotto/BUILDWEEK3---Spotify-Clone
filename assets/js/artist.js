@@ -28,7 +28,7 @@ function displayArtist() {
                 mostraArtista.innerHTML = 
                 `
                         <div class="card col-12">
-                            <img src="${data.picture}" class="card-img-top">
+                            <img src="${data.picture_big}" class="card-img-top">
                             <div class="card-body">
                                 <h5 class="card-title">${data.name}</h5>
 

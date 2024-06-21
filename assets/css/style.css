@@ -32,16 +32,19 @@ aside {
     margin: 0.5em 0.3em;
 }
 
-.container {
+.container,
+.container-fluid {
     border-radius: 5px;
     background-color: #121212;
 }
 
-.container ul {
+.container ul,
+.container-fluid ul{
     margin: 0;
 }
 
-.container ul li {
+.container ul li,
+.container-fluid ul li  {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -56,7 +59,8 @@ aside ul li {
     padding: 0.5em 0;
 }
 
-.container a {
+.container a,
+.container-fluid a {
     color: white;
     opacity: 0.8;
     text-decoration: none;
@@ -101,6 +105,7 @@ aside .container nav:nth-of-type(2)::-webkit-scrollbar-thumb,
     width: 10px;
 }
 
+/*ASIDE*/
 
 #home-btns i,
 #library-btns i {
@@ -190,6 +195,8 @@ aside .container nav:nth-of-type(2)::-webkit-scrollbar-thumb,
     border-radius: 5px;
 }
 
+/*COLLAPSING SIDEBAR*/
+
 #collapse-container {
     width: 40%;
     height: 85vh;
@@ -199,7 +206,6 @@ aside .container nav:nth-of-type(2)::-webkit-scrollbar-thumb,
 #dynamic-container section {
     overflow-y: scroll;
 }
-
 
 #collapse-container header {
     position: sticky;
@@ -308,6 +314,8 @@ aside .container nav:nth-of-type(2)::-webkit-scrollbar-thumb,
     width: 30px;
 }
 
+/*MAIN - DYNAMIC CONTAINER - INDEX*/
+
 main #dynamic-container {
     position: relative;
 }
@@ -318,7 +326,6 @@ main #dynamic-container header {
     position: sticky;
     top: 0%;
     right: 0%;
-    width: 100%;
     background-color: #121212;
     height: max-content;
     align-items: center;
@@ -375,6 +382,8 @@ main #dynamic-container header div {
     flex: 1 1 calc(25% - 32px);
     box-sizing: border-box;
 }
+
+/*CATEGORIES CARDS CONTAINER*/
 
 #browse-categories h2 {
     font-size: 1.3em;
@@ -436,6 +445,8 @@ main #dynamic-container header div {
     background-color: #d84000;
 }
 
+/*ALBUM PAGE*/
+
 #album-card {
     display: flex;
     flex-direction: row;
@@ -452,6 +463,7 @@ main #dynamic-container header div {
     width: 200px;
     height: 200px;
 }
+
 #album-card .card-body {
     padding-left: 20px;
 }
@@ -492,6 +504,30 @@ main #dynamic-container header div {
     margin-left: 1em;
 }
 
+#albumTable td,
+#albumTable th{
+    background-color: transparent;
+    color: white;
+    font-size: 0.8em;
+}
+
+#albumTable p{
+    margin: 0;
+}
+
+.track-title{
+    font-weight: 700;
+}
+
+.artist-name {
+    font-weight: 400;
+}
+
+audio {
+    height: 1.8em;
+}
+
+/*MUSIC PLAYER*/
 
 #music-player {
     height: 14vh;
@@ -517,13 +553,13 @@ main #dynamic-container header div {
     width: 30%;
 }
 
-.song #album-cover{
+.song #player-album{
     width: 60px;
     border-radius: 5px;
     overflow: hidden;
 }
 
-.song #album-cover img{
+.song #player-album img{
     width: 100%;
 }
 
@@ -545,7 +581,6 @@ main #dynamic-container header div {
     opacity: 0.8;
 }
 
-
 .controls {
     display: flex;
     flex-direction: column;
@@ -553,7 +588,6 @@ main #dynamic-container header div {
     align-items: center;
     width: 40%;
 }
-
 
 .control-buttons {
     display: flex;
@@ -583,7 +617,6 @@ main #dynamic-container header div {
     align-items: center;
     width: 100%;
 }
-
 
 .current-time, .total-time {
     font-size: 12px;
@@ -633,14 +666,57 @@ main #dynamic-container header div {
     color: #1ed760;
 }
 
+/*ARTIST PAGE*/
+
 @media (max-width: 1199px) {
+
+    aside {
+        background-color: #121212;
+    }
     #collapse-container,
     aside .container:nth-of-type(2),
-    main #dynamic-container header div,
+    main #dynamic-container header .main-top-btns,
     #music-player{
         display: none;
     }
 
+    #dynamic-container .main-nav-btns {
+        padding: 0;
+        padding-top: 1em;
+        margin: 0 auto;
+    }
+
+    #dynamic-container .main-nav-btns li:first-of-type{
+        background-color: #1ed760;
+    
+    }
+
+    #home-btns .btn {
+        font-size: 0.7em;
+    }
+
+    #home-btns span {
+        padding: 0 0.3em;
+    } 
+
+    aside,
+    #dynamic-container {
+        margin: 0;
+    }
+
+    #dynamic-container,
+    #dynamic-container header:first-child{
+        background-color: black;
+    }
+
+    #dynamic-container section {
+        height: 100vh;
+    }
+
+    .cards-container .card-title,
+    .cards-container .card-text {
+        font-size: 0.8em
+    }
 }
 
 @media (max-width: 992px) {
@@ -661,7 +737,8 @@ main #dynamic-container header div {
         flex: 0 0 calc(50% - 32px);
     }
 
-    #dynamic-container section .cards-container::-webkit-scrollbar {
+    #dynamic-container section::-webkit-scrollbar,
+    #dynamic-container .cards-container::-webkit-scrollbar {
         display: none;
     }
 }
@@ -669,5 +746,37 @@ main #dynamic-container header div {
 @media (max-width: 768px) {
     .card {
         flex: 0 0 calc(50% - 32px);
+    }
+}
+
+@media (max-width: 576px) {
+
+    aside {
+        display: flex;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 10%;
+        z-index:1000
+    }
+
+    aside ul {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    aside .btn,
+    aside a{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main,
+    main .container-fluid {
+        width: 100%;
+        height: 100%;
+        margin: 0;
     }
 }
