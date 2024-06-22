@@ -45,12 +45,12 @@ function displayArtist() {
                             let counter = 1; 
                             // console.log(singleTrack.tracks.data)
                             singleTrack.tracks.data.forEach(element => {
-                                console.log(element)
+                                // console.log(element)
                                 let tracks = document.getElementById('tracks')
                                 tracks.innerHTML += 
                                 `
                                 <td>${counter}</td>
-                                <td><img src="${element.preview}"></img></td>
+                                <td><img src="${element.picture_big}"></img></td>
                                 <td>${element.title}</td>
                                 <td>${element.rank}</td>
                                 <td>${element.duration}</td>
