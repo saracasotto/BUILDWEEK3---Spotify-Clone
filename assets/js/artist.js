@@ -1,68 +1,55 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    await asideArtist();
+    await albumClick();
+    displayArtist();
+});
 
-    await asideArtist()
-    await albumClick()
-    displayArtist()
-
-})
-
-
-const params = new URLSearchParams(location.search)
-let id = params.get('id')
-
-//params.set('idartist', id);
-
-// console.log(params.toString());
+const params = new URLSearchParams(location.search);
+let id = params.get('id');
 
 function displayArtist() {
-    fetch("https://striveschool-api.herokuapp.com/api/deezer/artist/" + id, {
-
-    })
-        .then(response => {
-            // console.log(response)
-            response.json()
-                .then(data => {
-                    // console.log(data);
-
-                    let mostraArtista = document.getElementById('artist-container')
-                    mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
-                    mostraArtista.style.backgroundSize = 'scale';
-                    mostraArtista.style.backgroundPosition = 'center';
-                    mostraArtista.style.backgroundRepeat = 'no-repeat';
-                    mostraArtista.innerHTML = `
-                    <div class="card-body">
+    fetch("https://striveschool-api.herokuapp.com/api/deezer/artist/" + id)
+        .then(response => response.json())
+        .then(data => {
+            let mostraArtista = document.getElementById('artist-container');
+            mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
+            mostraArtista.style.backgroundSize = 'scale';
+            mostraArtista.style.backgroundPosition = 'center';
+            mostraArtista.style.backgroundRepeat = 'no-repeat';
+            mostraArtista.innerHTML = `
+                <div class="card-body">
                     <h5>${data.name}</h5>
-                    </div>
-                    `;
+                </div>
+            `;
 
-                    fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + id, {
+            // Fetch popular tracks of the artist
+            fetch("https://striveschool-api.herokuapp.com/api/deezer/artist/" + id + "/top?limit=20")
+                .then(response => response.json())
+                .then(tracksData => {
+                    let counter = 1;
+                    let tracks = document.getElementById('tracks');
+                    tracks.innerHTML = ""; // Svuota il contenitore delle tracce
 
-                    })
-                    .then(response => {
-                        // console.log(response)
-                        response.json()
-                        .then(singleTrack => {
-                            let counter = 1; 
-                            // console.log(singleTrack.tracks.data)
-                            singleTrack.tracks.data.forEach(element => {
-                                // console.log(element)
-                                let tracks = document.getElementById('tracks')
-                                tracks.innerHTML += 
-                                `
+                    tracksData.data.forEach(element => {
+                        tracks.innerHTML += `
+                            <tr>
                                 <td>${counter}</td>
-                                <td><img src="${element.picture_big}"></ img></td>
+                                <td><img src="${element.album.cover_small}" alt="${element.title} cover"></td>
                                 <td>${element.title}</td>
-                                <td>${element.rank}</td>
-                                <td>${element.duration}</td>
-                               
-                                `
-                                counter ++
-                            });
-                        })
-                    })
-
-
+                                 <td><audio controls class="audio-controls">
+                            <source src="${element.preview}" type="audio/mp3"></audio>
+                        </td>
+                                <td>${Math.floor(element.duration / 60)}:${
+                                    element.duration % 60 < 10 ? "0" : ""
+                                  }${element.duration % 60}</td>
+                            </tr>
+                        `;
+                        counter++;
+                    });
                 })
+                .catch(error => {
+                    console.log('Errore nel recupero delle tracce:', error);
+                });
         })
         .catch(error => {
             console.log('Errore nella richiesta fetch:', error);
