@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       BROWSERESULT.classList.remove("d-none");
       BROWSERESULT.innerHTML = `
   <div>
-    <h2>Artista</h2>
+    <h2>Artist</h2>
     <div id="results-artist" class="d-flex">
     </div>
   </div>
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             ARTIST.id,
             ALBUM.title,
             ARTIST.name,
-            ALBUM.coverSmall,
+            ALBUM.coverBig,
             false
           );
         }
@@ -267,7 +267,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           artistCard(
             "results-artist",
             ARTIST.id,
-            ARTIST.pictureSmall,
+            ARTIST.pictureBig,
             ARTIST.name,
             null,
             false
