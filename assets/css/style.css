@@ -480,6 +480,23 @@ main #dynamic-container header div {
     background-color: #d84000;
 }
 
+#browse-results {
+    flex-wrap: wrap;
+}
+
+#browse-results .card-img-container {
+    padding-bottom: 200px;
+    position: relative;
+    overflow: hidden;
+}
+#browse-results .card-img-container img {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+}
+
+
+
 /*ALBUM PAGE*/
 
 #album {
