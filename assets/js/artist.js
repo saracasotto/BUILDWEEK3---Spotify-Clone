@@ -1,6 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    await asideArtist();
-    await albumClick();
     displayArtist();
 });
 
@@ -13,7 +11,7 @@ function displayArtist() {
         .then(data => {
             let mostraArtista = document.getElementById('artist-container');
             mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
-            mostraArtista.style.backgroundSize = 'scale';
+            mostraArtista.style.backgroundSize = 'cover';
             mostraArtista.style.backgroundPosition = 'center';
             mostraArtista.style.backgroundRepeat = 'no-repeat';
             mostraArtista.innerHTML = `
@@ -36,23 +34,43 @@ function displayArtist() {
                                 <td>${counter}</td>
                                 <td><img src="${element.album.cover_small}" alt="${element.title} cover"></td>
                                 <td>${element.title}</td>
-                                 <td><audio controls class="audio-controls">
-                            <source src="${element.preview}" type="audio/mp3"></audio>
-                        </td>
-                                <td>${Math.floor(element.duration / 60)}:${
-                                    element.duration % 60 < 10 ? "0" : ""
-                                  }${element.duration % 60}</td>
+                                <td><i class="bi bi-play-fill play-button" 
+                                       data-preview="${element.preview}" 
+                                       data-album-cover="${element.album.cover_big}"
+                                       data-artist="${data.name}" 
+                                       data-title="${element.title}" 
+                                       style="cursor: pointer;"></i></td>
+                                <td>${Math.floor(element.duration / 60)}:${element.duration % 60 < 10 ? "0" : ""}${element.duration % 60}</td>
                             </tr>
                         `;
                         counter++;
                     });
+
+                   
+                    const playButtons = document.querySelectorAll('.play-button');
+                    playButtons.forEach(button => {
+                        button.addEventListener('click', () => {
+                            const previewSrc = button.getAttribute('data-preview');
+                            const albumCover = button.getAttribute('data-album-cover');
+                            const artistName = button.getAttribute('data-artist');
+                            const trackTitle = button.getAttribute('data-title');
+                            const audioPlayer = document.getElementById('audioPlayer');
+                            const albumImage = document.getElementById('album-image');
+                            const playerArtist = document.getElementById('player-artist');
+                            const playerTitle = document.getElementById('player-title');
+
+                            audioPlayer.src = previewSrc;
+                            audioPlayer.play();
+                            albumImage.src = albumCover;
+                            albumImage.classList.remove('d-none');
+                            playerArtist.textContent = artistName;
+                            playerTitle.textContent = trackTitle;
+                        });
+                    });
                 })
-                .catch(error => {
-                    console.log('Errore nel recupero delle tracce:', error);
-                });
+                
         })
         .catch(error => {
             console.log('Errore nella richiesta fetch:', error);
         });
 }
-
