@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function albumCards() {
   for (const [i, ALBUM] of albums.entries()) {
-    console.log(`ALBUMCARDS => cardsContainer ${i % 4}`);
-    console.log(`ALBUMCARDS => albumCard${i + 1}`);
+    // console.log(`ALBUMCARDS => cardsContainer ${i % 4}`);
+    // console.log(`ALBUMCARDS => albumCard${i + 1}`);
     const CARDSCONTAINER = document.getElementById(`cardsContainer${i % 4}`);
     const ARTIST = artists[i];
     CARDSCONTAINER.innerHTML += `

@@ -107,8 +107,15 @@ async function collapsedTitle(title) {
   `;
 }
 
-async function songCard(idAlbum, idArtist, albumTitle, artistName, cover) {
-  document.getElementById("song-card").innerHTML = `
+async function albumCard(
+  idHtml,
+  idAlbum,
+  idArtist,
+  albumTitle,
+  artistName,
+  cover
+) {
+  document.getElementById(idHtml).innerHTML += `
   <div class="card-img-container">
       <a href="./album.html?id=${idAlbum}"><img src="${cover}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
@@ -126,8 +133,15 @@ async function songCard(idAlbum, idArtist, albumTitle, artistName, cover) {
   `;
 }
 
-async function artistCard(idArtist, picture, artistName, idAlbum, artistFan) {
-  document.getElementById("artist-card").innerHTML = `
+async function artistCard(
+  idHtml,
+  idArtist,
+  picture,
+  artistName,
+  idAlbum,
+  artistFan
+) {
+  let innesto = `
   <div class="card-img-container">
       <a href="./artist.html?=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
@@ -137,6 +151,9 @@ async function artistCard(idArtist, picture, artistName, idAlbum, artistFan) {
       </a>
       <a href="./album.html?id=${idAlbum}">
         <p class="card-text">${artistName}</p>
+        `;
+  if (artistFan !== null)
+    innesto += `
         <p class="card-text">${artistFan} listeners</p>
       </a>
       <div class="card-button-overlay">
@@ -144,6 +161,7 @@ async function artistCard(idArtist, picture, artistName, idAlbum, artistFan) {
       </div>
     </div>
   `;
+  document.getElementById(idHtml).innerHTML += innesto;
 }
 
 async function albumClick(albumCard) {
@@ -185,7 +203,8 @@ async function loadContent(idAlbum, idArtist) {
       // console.log("ALBUMCLICK => artists\n", artists.id);
       // console.log(ALBUM.title);
       collapsedTitle(ALBUM.title);
-      songCard(
+      albumCard(
+        "song-card",
         ALBUM.id,
         artists.id,
         ALBUM.title,
@@ -193,6 +212,7 @@ async function loadContent(idAlbum, idArtist) {
         ALBUM.coverMedium
       );
       artistCard(
+        "artist-card",
         ALBUM.id,
         artists.pictureMedium,
         artists.name,
@@ -216,14 +236,23 @@ async function loadPlayer(img, title, artist) {
 }
 
 const SEARCHINPUT = document.getElementById("searchInput");
-document.getElementById("searchInput").addEventListener("keyup", () => {
-  getSearch(SEARCHINPUT.value);
-  console.log("SEARCHINPUT => album");
-  console.table(albums);
-  console.log("SEARCHINPUT => artist");
-  console.table(artists);
-  document.getElementById("browse-results").innerHTML = `
-  <div id="results-artist">
+document.getElementById("searchInput").addEventListener("keyup", async () => {
+  console.log("SEARCHINPUT => ", SEARCHINPUT.value.toLowerCase());
+  if (SEARCHINPUT.value === "") {
+    document.getElementById("browse-categories").classList.remove("d-none");
+    document.getElementById("browse-results").classList.add("d-none");
+  } else {
+    await getSearch(SEARCHINPUT.value.toLowerCase());
+    getArtist(SEARCHINPUT.value.toLowerCase());
+    // console.log("SEARCHINPUT => album");
+    // console.table(albums);
+    // console.log("SEARCHINPUT => artist");
+    // console.table(artists);
+    document.getElementById("browse-categories").classList.add("d-none");
+    const BROWSERESULT = document.getElementById("browse-results");
+    BROWSERESULT.classList.remove("d-none");
+    BROWSERESULT.innerHTML = `
+  <div>
     <h2>Artista</h2>
     <div id="results-artist" class="d-flex">
     </div>
@@ -234,6 +263,47 @@ document.getElementById("searchInput").addEventListener("keyup", () => {
     </div>
   </div>
   `;
-  // document.getElementById("results-artist").innerHTML = ``;
-  // document.getElementById("results-album").innerHTML = ``;
+    for (let i = 0; i < albums.length; i++) {
+      const ALBUM = albums[i];
+      const ARTIST = artists[i];
+      // console.table(ALBUM);
+      // console.table(ARTIST);
+      albumCard(
+        "results-album",
+        ALBUM.id,
+        ARTIST.id,
+        ALBUM.title,
+        ARTIST.name,
+        ALBUM.coverSmall
+      );
+      artistCard(
+        "results-artist",
+        ALBUM.id,
+        ARTIST.pictureSmall,
+        ARTIST.name,
+        ALBUM.id,
+        null
+      );
+    }
+  }
+
+  // for (let i = 0; i < artists.length; i++) {
+  //   const ARTIST = artists[i];
+  //   document.getElementById("results-artist").innerHTML += `
+  //   <div>
+  //     <img src="${ARTIST.pictureSmall}" class="rounded-circle" alt="...">
+  //     <h5 class="card-title text-white">${ARTIST.name}</h5>
+  //     <p>Artista</p>
+  //   </div>
+  //     `;
+  // }
+  // albums.forEach((ALBUM) => {
+  //   document.getElementById("results-album").innerHTML = `
+  //   <div>
+  //     <img src="${ALBUM.coverSmall}" class="rounded-circle" alt="...">
+  //     <a href="./album.html?id=${ALBUM.id}"><h5 class="card-title text-white">${ALBUM.title}</h5></a>
+  //     <p>Album</p>
+  //   </div>
+  //     `;
+  // });
 });
