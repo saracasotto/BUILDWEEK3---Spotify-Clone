@@ -4,6 +4,7 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 // console.log(id);
 
+
 document.addEventListener("DOMContentLoaded", async () => {
   await asideArtist();
   await albumClick();
@@ -31,6 +32,7 @@ async function getAlbum() {
     // console.log(tracks);
     tracks.data.forEach((track, i) => {
       songs += `<tr>
+
                         <th scope="row">${i + 1}</th>
                         <td>
                         <p class="track-title">${track.title}</p>
@@ -44,10 +46,12 @@ async function getAlbum() {
         track.duration % 60 < 10 ? "0" : ""
       }${track.duration % 60}</td>
                     </tr>`;
-    });
+        });
 
-    document.getElementById("tracks").innerHTML = songs;
-  } catch (error) {
-    console.error("Error fetching album data:", +error);
-  }
+        
+        document.getElementById("tracks").innerHTML = songs;
+
+    } catch (error) {
+        console.error("Error fetching album data:", + error);
+    }
 }

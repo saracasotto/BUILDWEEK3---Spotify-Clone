@@ -482,6 +482,11 @@ main #dynamic-container header div {
 
 /*ALBUM PAGE*/
 
+#album {
+    background: linear-gradient(180deg, rgba(184,43,43,1) 0%, rgba(18,18,18,1) 49%);
+
+}
+
 #album-card {
     display: flex;
     flex-direction: row;
@@ -703,6 +708,24 @@ audio {
 }
 
 /*ARTIST PAGE*/
+
+#artist-container {
+    height: 300px;
+}
+
+#artist-container .card-body{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 1em;
+}
+
+#artist-container .card-body h5 {
+    font-size: 5em;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
 
 @media (max-width: 1199px) {
 
