@@ -8,9 +8,7 @@ let albums = null;
 async function getArtist(id) {
   const RESPONSE = await fetch(URLARTIST + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
-  // console.log("GETARTIST => data\n", data);
   artists = {
     id: data["id"],
     name: data["name"],
@@ -20,7 +18,6 @@ async function getArtist(id) {
     pictureXl: data["picture_xl"],
     nFan: `${data["nb_fan"]}`,
   };
-  // console.log("GETARTIST => artists\n", artists));
   return true;
 }
 
@@ -32,10 +29,8 @@ async function getSearch(query) {
   if (!response.ok) {
     throw new Error("OOPS.....ERROR");
   } else {
-    // console.log("GETSEARCH => response\n", response);
   }
   const data = await response.json();
-  // console.log("GETSEARCH => data\n", data.data);
   albums = data.data.map((ALBUM) => ({
     id: `${ALBUM.album.id}`,
     cover: ALBUM.album.cover,
@@ -55,13 +50,11 @@ async function getSearch(query) {
     pictureBig: ARTIST.artist.picture_big,
     pictureXl: ARTIST.artist.picture_xl,
   }));
-  // console.log("GETSEARCH => search\n", searchs);
 }
 
 async function getAlbum(id) {
   const RESPONSE = await fetch(URLALBUM + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
   albums = {
     idAlbum: data["id"],
@@ -73,7 +66,6 @@ async function getAlbum(id) {
     artistName: data["artist"]["name"],
     idArtist: data["artist"]["id"],
   };
-  // console.log("GETARTIST => artist\n", artist);
   return true;
 }
 
@@ -181,17 +173,7 @@ async function albumClick(albumCard) {
     idArtist = albumCard.dataset.idartist;
     localStorage.setItem("idAlbum", idAlbum);
     localStorage.setItem("idArtist", idArtist);
-    // console.log(
-    //   "ALBUMCLICK => if !== UNDEFINED => ",
-    //   albumCard !== undefined,
-    //   idAlbum,
-    //   idArtist
-    // );
   } else if (idAlbum === null || idArtist === null) {
-    // console.log(
-    //   "ALBUMCLICK => if NULL => ",
-    //   idAlbum === null && idArtist === null
-    // );
     localStorage.setItem("idAlbum", albums[0].id);
     localStorage.setItem("idArtist", artists[0].id);
     idAlbum = albums[0].id;
@@ -199,7 +181,6 @@ async function albumClick(albumCard) {
   } else {
     idAlbum = localStorage.getItem("idAlbum");
     idArtist = localStorage.getItem("idArtist");
-    // console.log("ALBUMCLICK => else localStorage => ", idAlbum, idArtist);
   }
   loadContent(idAlbum, idArtist);
 }
@@ -208,9 +189,6 @@ async function loadContent(idAlbum, idArtist) {
     const ALBUM = albums[i];
     if (ALBUM.id === idAlbum) {
       await getArtist(idArtist);
-      // console.log("LOADCONTENT => ", idAlbum, idArtist);
-      // console.log("ALBUMCLICK => artists\n", artists.id);
-      // console.log(ALBUM.title);
       collapsedTitle(ALBUM.title);
       albumCard(
         "song-card",
@@ -251,13 +229,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       document.getElementById("browse-categories").classList.remove("d-none");
       document.getElementById("browse-results").classList.add("d-none");
     } else {
-      // console.log("SEARCHINPUT => ", SEARCHINPUT.value.toLowerCase());
       await getSearch(SEARCHINPUT.value.toLowerCase());
       getArtist(SEARCHINPUT.value.toLowerCase());
-      // console.log("SEARCHINPUT => album");
-      // console.table(albums);
-      // console.log("SEARCHINPUT => artist");
-      // console.table(artists);
       document.getElementById("browse-categories").classList.add("d-none");
       const BROWSERESULT = document.getElementById("browse-results");
       BROWSERESULT.classList.remove("d-none");
@@ -277,8 +250,6 @@ document.addEventListener("DOMContentLoaded", async () => {
       for (let i = 0; i < albums.length; i++) {
         const ALBUM = albums[i];
         const ARTIST = artists[i];
-        // console.log("duplicati => ", !DUPLICATI.includes(ALBUM.id));
-        // console.log("duplicati => ", !DUPLICATI.includes(ARTIST.id));
         if (!DUPLICATI.includes(ALBUM.id)) {
           DUPLICATI.push(ALBUM.id);
           albumCard(
@@ -304,25 +275,5 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
       }
     }
-
-    // for (let i = 0; i < artists.length; i++) {
-    //   const ARTIST = artists[i];
-    //   document.getElementById("results-artist").innerHTML += `
-    //   <div>
-    //     <img src="${ARTIST.pictureSmall}" class="rounded-circle" alt="...">
-    //     <h5 class="card-title text-white">${ARTIST.name}</h5>
-    //     <p>Artista</p>
-    //   </div>
-    //     `;
-    // }
-    // albums.forEach((ALBUM) => {
-    //   document.getElementById("results-album").innerHTML = `
-    //   <div>
-    //     <img src="${ALBUM.coverSmall}" class="rounded-circle" alt="...">
-    //     <a href="./album.html?id=${ALBUM.id}"><h5 class="card-title text-white">${ALBUM.title}</h5></a>
-    //     <p>Album</p>
-    //   </div>
-    //     `;
-    // });
   });
 });
