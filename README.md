@@ -12,7 +12,7 @@ It includes three main pages: Home, Album, and Artist.
 - **[Mirko Campetiello](https://github.com/mirko-mc)**
 - **[Sara Casotto](https://github.com/saracasotto)**
 
-- 
+
 ## Features
 
 - **Dynamic Content Insertion:**
