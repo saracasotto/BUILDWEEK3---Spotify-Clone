@@ -38,11 +38,9 @@ async function getAlbum() {
                         <p class="track-title">${track.title}</p>
                         <p class="artist-name">${track.artist.name}</p></td>
                         <td><audio controls class="audio-controls">
-                            <source src="${track.preview
-        }" type="audio/mp3"></audio>
+                            <source src="${track.preview}" type="audio/mp3"></audio>
                         </td>
-                        <td>${Math.floor(track.duration / 60)}:${track.duration % 60 < 10 ? "0" : ""
-        }${track.duration % 60}</td>
+                        <td>${Math.floor(track.duration / 60)}:${track.duration % 60 < 10 ? "0" : ""}${track.duration % 60}</td>
                     </tr>`;
     });
 

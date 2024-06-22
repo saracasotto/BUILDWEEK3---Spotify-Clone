@@ -207,7 +207,7 @@ async function loadContent(idAlbum, idArtist) {
         artists.nFan,
         true
       );
-      loadPlayer(ALBUM.coverSmall, ALBUM.title, artists.name);
+      loadPlayer(ALBUM.coverMedium, ALBUM.title, artists.name);
       break;
     }
   }
