@@ -181,7 +181,7 @@ async function loadContent(idAlbum, idArtist) {
     const ALBUM = albums[i];
     if (ALBUM.id === idAlbum) {
       await getArtist(idArtist);
-      console.log("LOADCONTENT => ", idAlbum, idArtist);
+      // console.log("LOADCONTENT => ", idAlbum, idArtist);
       // console.log("ALBUMCLICK => artists\n", artists.id);
       // console.log(ALBUM.title);
       collapsedTitle(ALBUM.title);
@@ -214,3 +214,22 @@ async function loadPlayer(img, title, artist) {
   <p class="player-artist">${artist}</p>
   `;
 }
+
+const SEARCHINPUT = document.getElementById("searchInput");
+document.getElementById("searchInput").addEventListener("keyup", () => {
+  getSearch(SEARCHINPUT.value);
+  console.log("SEARCHINPUT => album");
+  console.table(albums);
+  console.log("SEARCHINPUT => artist");
+  console.table(artists);
+  document.getElementById("browse-categories").innerHTML = `
+  <div id="results-artist">
+    <h2>Artista</h2>
+  </div>
+  <div id="results-album">
+    <h2>Album</h2>
+  </div>
+  `;
+  // document.getElementById("results-artist").innerHTML = ``;
+  // document.getElementById("results-album").innerHTML = ``;
+});
