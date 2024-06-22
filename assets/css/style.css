@@ -374,7 +374,7 @@ main #dynamic-container header div {
     margin: 0 1em;
     color: white;
     border: solid 0.5px transparent;
-    min-width: 250px;
+    max-width: 250px;
 
 }
 
@@ -735,15 +735,21 @@ audio {
 
     #collapse-container,
     aside .container:nth-of-type(2),
-    main #dynamic-container header .main-top-btns,
+    main #dynamic-container header .main-top-btns div:nth-of-type(2),
+    main #dynamic-container header .main-top-btns button,
     #music-player {
         display: none;
     }
 
+    
+    #dynamic-container header .main-top-btns,
     #dynamic-container .main-nav-btns {
         padding: 0;
-        padding-top: 1em;
         margin: 0 auto;
+    }
+
+    #searchInput{
+        margin: 0;
     }
 
     #dynamic-container .main-nav-btns li:first-of-type {
@@ -776,6 +782,10 @@ audio {
     .cards-container .card-title,
     .cards-container .card-text {
         font-size: 0.8em
+    }
+
+    #browse-categories .cards-container .card {
+        font-size: 1.5em;
     }
 }
 
