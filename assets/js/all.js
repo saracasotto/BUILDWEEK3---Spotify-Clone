@@ -113,9 +113,12 @@ async function albumCard(
   idArtist,
   albumTitle,
   artistName,
-  cover
+  cover,
+  replace
 ) {
-  document.getElementById(idHtml).innerHTML += `
+  let innesto = "";
+  if (replace === false) innesto += `<div class="card">`;
+  innesto += `
   <div class="card-img-container">
       <a href="./album.html?id=${idAlbum}"><img src="${cover}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
@@ -131,6 +134,12 @@ async function albumCard(
       </div>
     </div>
   `;
+  if (replace === false) {
+    innesto += `</div>`;
+    document.getElementById(idHtml).innerHTML += innesto;
+  } else {
+    document.getElementById(idHtml).innerHTML = innesto;
+  }
 }
 
 async function artistCard(
@@ -139,9 +148,12 @@ async function artistCard(
   picture,
   artistName,
   idAlbum,
-  artistFan
+  artistFan,
+  replace
 ) {
-  let innesto = `
+  let innesto = "";
+  if (replace === false) innesto += `<div class="card">`;
+  innesto += `
   <div class="card-img-container">
       <a href="./artist.html?=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
@@ -153,15 +165,20 @@ async function artistCard(
         <p class="card-text">${artistName}</p>
         `;
   if (artistFan !== null)
-    innesto += `
-        <p class="card-text">${artistFan} listeners</p>
+    innesto += `<p class="card-text">${artistFan} listeners</p>`;
+  innesto += `
       </a>
       <div class="card-button-overlay">
         <button class="btn">Follow</button>
       </div>
     </div>
-  `;
-  document.getElementById(idHtml).innerHTML += innesto;
+    `;
+  if (replace === false) {
+    innesto += `</div>`;
+    document.getElementById(idHtml).innerHTML += innesto;
+  } else {
+    document.getElementById(idHtml).innerHTML = innesto;
+  }
 }
 
 async function albumClick(albumCard) {
@@ -209,7 +226,8 @@ async function loadContent(idAlbum, idArtist) {
         artists.id,
         ALBUM.title,
         artists.name,
-        ALBUM.coverMedium
+        ALBUM.coverMedium,
+        true
       );
       artistCard(
         "artist-card",
@@ -217,7 +235,8 @@ async function loadContent(idAlbum, idArtist) {
         artists.pictureMedium,
         artists.name,
         ALBUM.id,
-        artists.nFan
+        artists.nFan,
+        true
       );
       loadPlayer(ALBUM.coverSmall, ALBUM.title, artists.name);
       break;
@@ -234,24 +253,24 @@ async function loadPlayer(img, title, artist) {
   <p class="player-artist">${artist}</p>
   `;
 }
-
-const SEARCHINPUT = document.getElementById("searchInput");
-document.getElementById("searchInput").addEventListener("keyup", async () => {
-  console.log("SEARCHINPUT => ", SEARCHINPUT.value.toLowerCase());
-  if (SEARCHINPUT.value === "") {
-    document.getElementById("browse-categories").classList.remove("d-none");
-    document.getElementById("browse-results").classList.add("d-none");
-  } else {
-    await getSearch(SEARCHINPUT.value.toLowerCase());
-    getArtist(SEARCHINPUT.value.toLowerCase());
-    // console.log("SEARCHINPUT => album");
-    // console.table(albums);
-    // console.log("SEARCHINPUT => artist");
-    // console.table(artists);
-    document.getElementById("browse-categories").classList.add("d-none");
-    const BROWSERESULT = document.getElementById("browse-results");
-    BROWSERESULT.classList.remove("d-none");
-    BROWSERESULT.innerHTML = `
+document.addEventListener("DOMContentLoaded", async () => {
+  const SEARCHINPUT = document.getElementById("searchInput");
+  document.getElementById("searchInput").addEventListener("keyup", async () => {
+    if (SEARCHINPUT.value === "") {
+      document.getElementById("browse-categories").classList.remove("d-none");
+      document.getElementById("browse-results").classList.add("d-none");
+    } else {
+      // console.log("SEARCHINPUT => ", SEARCHINPUT.value.toLowerCase());
+      await getSearch(SEARCHINPUT.value.toLowerCase());
+      getArtist(SEARCHINPUT.value.toLowerCase());
+      // console.log("SEARCHINPUT => album");
+      // console.table(albums);
+      // console.log("SEARCHINPUT => artist");
+      // console.table(artists);
+      document.getElementById("browse-categories").classList.add("d-none");
+      const BROWSERESULT = document.getElementById("browse-results");
+      BROWSERESULT.classList.remove("d-none");
+      BROWSERESULT.innerHTML = `
   <div>
     <h2>Artista</h2>
     <div id="results-artist" class="d-flex">
@@ -263,47 +282,57 @@ document.getElementById("searchInput").addEventListener("keyup", async () => {
     </div>
   </div>
   `;
-    for (let i = 0; i < albums.length; i++) {
-      const ALBUM = albums[i];
-      const ARTIST = artists[i];
-      // console.table(ALBUM);
-      // console.table(ARTIST);
-      albumCard(
-        "results-album",
-        ALBUM.id,
-        ARTIST.id,
-        ALBUM.title,
-        ARTIST.name,
-        ALBUM.coverSmall
-      );
-      artistCard(
-        "results-artist",
-        ALBUM.id,
-        ARTIST.pictureSmall,
-        ARTIST.name,
-        ALBUM.id,
-        null
-      );
+      const DUPLICATI = [];
+      for (let i = 0; i < albums.length; i++) {
+        const ALBUM = albums[i];
+        const ARTIST = artists[i];
+        console.log("duplicati => ", !DUPLICATI.includes(ALBUM.id));
+        console.log("duplicati => ", !DUPLICATI.includes(ARTIST.id));
+        if (!DUPLICATI.includes(ALBUM.id)) {
+          DUPLICATI.push(ALBUM.id);
+          albumCard(
+            "results-album",
+            ALBUM.id,
+            ARTIST.id,
+            ALBUM.title,
+            ARTIST.name,
+            ALBUM.coverSmall,
+            false
+          );
+        }
+        if (!DUPLICATI.includes(ARTIST.id)) {
+          DUPLICATI.push(ARTIST.id);
+          artistCard(
+            "results-artist",
+            ALBUM.id,
+            ARTIST.pictureSmall,
+            ARTIST.name,
+            ALBUM.id,
+            null,
+            false
+          );
+        }
+      }
     }
-  }
 
-  // for (let i = 0; i < artists.length; i++) {
-  //   const ARTIST = artists[i];
-  //   document.getElementById("results-artist").innerHTML += `
-  //   <div>
-  //     <img src="${ARTIST.pictureSmall}" class="rounded-circle" alt="...">
-  //     <h5 class="card-title text-white">${ARTIST.name}</h5>
-  //     <p>Artista</p>
-  //   </div>
-  //     `;
-  // }
-  // albums.forEach((ALBUM) => {
-  //   document.getElementById("results-album").innerHTML = `
-  //   <div>
-  //     <img src="${ALBUM.coverSmall}" class="rounded-circle" alt="...">
-  //     <a href="./album.html?id=${ALBUM.id}"><h5 class="card-title text-white">${ALBUM.title}</h5></a>
-  //     <p>Album</p>
-  //   </div>
-  //     `;
-  // });
+    // for (let i = 0; i < artists.length; i++) {
+    //   const ARTIST = artists[i];
+    //   document.getElementById("results-artist").innerHTML += `
+    //   <div>
+    //     <img src="${ARTIST.pictureSmall}" class="rounded-circle" alt="...">
+    //     <h5 class="card-title text-white">${ARTIST.name}</h5>
+    //     <p>Artista</p>
+    //   </div>
+    //     `;
+    // }
+    // albums.forEach((ALBUM) => {
+    //   document.getElementById("results-album").innerHTML = `
+    //   <div>
+    //     <img src="${ALBUM.coverSmall}" class="rounded-circle" alt="...">
+    //     <a href="./album.html?id=${ALBUM.id}"><h5 class="card-title text-white">${ALBUM.title}</h5></a>
+    //     <p>Album</p>
+    //   </div>
+    //     `;
+    // });
+  });
 });
