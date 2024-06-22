@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   await asideArtist();
   await albumCards();
+  await albumClick();
 });
 
 async function albumCards() {
@@ -28,5 +29,4 @@ async function albumCards() {
     }
   }
 }
-
 

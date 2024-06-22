@@ -148,20 +148,24 @@ async function artistCard(idArtist, picture, artistName, idAlbum, artistFan) {
 }
 
 async function albumClick(albumCard) {
-  // && albumCard.dataset.idartist === undefined
-  let idAlbum = "";
-  let idArtist = "";
-  if (albumCard === undefined) {
-    idAlbum = new URLSearchParams(window.location.search).get("idalbum");
-    idArtist = new URLSearchParams(window.location.search).get("idartist");
+  let idAlbum = localStorage.getItem("idAlbum");
+  let idArtist = localStorage.getItem("idArtist");
+  console.log("ALBUMCLICK => idAlbum\n", idAlbum,idArtist);
+  if (albumCard === undefined || (idAlbum === null && idArtist === null)) {
+    console.log("ALBUMCLICK => ids\n", albums[0].id, artists[0].id);
+    localStorage.setItem("idAlbum", albums[0].id);
+    localStorage.setItem("idArtist", artists[0].id);
+    await getArtist(artists[0].id);
+    console.log("ALBUMCLICK => artists\n", artists);
   } else {
     localStorage.setItem("idAlbum", albumCard.dataset.idalbum);
     localStorage.setItem("idArtist", albumCard.dataset.idartist);
+    await getArtist(albumCard.dataset.idartist);
+    console.log("ALBUMCLICK => artists\n", artists);
   }
   for (let i = 0; i < albums.length; i++) {
     const ALBUM = albums[i];
-    await getArtist(localStorage.getItem("idArtist"));
-    if (ALBUM.id === localStorage.getItem("idAlbum")) {
+    if (ALBUM.id === idAlbum) {
       collapsedTitle(ALBUM.title);
       songCard(
         ALBUM.id,
@@ -177,7 +181,18 @@ async function albumClick(albumCard) {
         ALBUM.id,
         artists.nFan
       );
+      loadPlayer(ALBUM.coverSmall, ALBUM.title, artists.name);
       break;
     }
   }
+}
+
+async function loadPlayer(img, title, artist) {
+  document.getElementById("player-album").innerHTML = `
+  <img src="${img}" alt="Album">
+  `;
+  document.getElementById("track-info").innerHTML = `
+  <p class="player-title">${title}</p>
+  <p class="player-artist">${artist}</p>
+  `;
 }
