@@ -762,8 +762,7 @@ audio {
     #collapse-container,
     aside .container:nth-of-type(2),
     main #dynamic-container header .main-top-btns div:nth-of-type(2),
-    main #dynamic-container header .main-top-btns button,
-    #music-player {
+    main #dynamic-container header .main-top-btns button{
         display: none;
     }
 
@@ -814,6 +813,46 @@ audio {
         font-size: 1em;
         height: 100px;
     }
+
+}
+
+@media (min-width: 576px) and (max-width: 1199px) {
+    
+    #music-player {
+        top: 50%;
+        left: 0;
+        width: 25%;
+        flex-direction: column;
+        background-color: transparent;
+    }
+
+    #music-player .controls button {
+        font-size: 1.3em;
+    }
+
+    #music-player #player-album {
+        width: 70%;
+        margin-bottom: 1em;
+    }
+
+    .song,
+    .track-info{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+    }
+
+    #music-player #progress-container {
+        width: 100%;
+    }
+    .controls button.repeat,
+    .controls button.shuffle,
+    .extra-controls{
+        display: none;
+    }
 }
 
 @media (max-width: 992px) {
@@ -835,7 +874,9 @@ audio {
     }
 
     #dynamic-container section::-webkit-scrollbar,
-    #dynamic-container .cards-container::-webkit-scrollbar {
+    #dynamic-container .cards-container::-webkit-scrollbar,
+    #albumTable thead th:nth-of-type(4),
+    #albumTable tr td:nth-of-type(4) {
         display: none;
     }
 }
@@ -876,4 +917,23 @@ audio {
         height: 100%;
         margin: 0;
     }
+
+    #music-player {
+        bottom: 10%;
+        height: 10%;
+        justify-content: center;
+        background-color: darkred ;
+    }
+
+    .song,
+    .controls {
+        width: 50%;
+    }
+
+    .controls button.repeat,
+    .controls button.shuffle,
+    .extra-controls{
+        display: none;
+    }
+
 }
