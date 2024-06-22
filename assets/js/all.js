@@ -80,10 +80,6 @@ async function getAlbum(id) {
 /** aside => artist */
 async function asideArtist() {
   await getSearch("a");
-  // console.log("ASIDEARTIST => album");
-  // console.table(album);
-  // console.log("ASIDEARTIST => artist");
-  // console.table(artist);
   for (let i = 0; i < 16; i++) {
     const ARTIST = artists[i];
     document.getElementById("recent-artists-aside-list").innerHTML += `
@@ -147,7 +143,6 @@ async function artistCard(
   idArtist,
   picture,
   artistName,
-  idAlbum,
   artistFan,
   replace
 ) {
@@ -155,13 +150,10 @@ async function artistCard(
   if (replace === false) innesto += `<div class="card">`;
   innesto += `
   <div class="card-img-container">
-      <a href="./artist.html?=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
+      <a href="./artist.html?id=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
     <div class="card-body">
-      <a href="./artist.html?=${idArtist}">
-        <h5 class="card-title">${artistName}</h5>
-      </a>
-      <a href="./album.html?id=${idAlbum}">
+      <a href="./artist.html?id=${idArtist}">
         <p class="card-text">${artistName}</p>
         `;
   if (artistFan !== null)
@@ -231,10 +223,9 @@ async function loadContent(idAlbum, idArtist) {
       );
       artistCard(
         "artist-card",
-        ALBUM.id,
+        artists.id,
         artists.pictureMedium,
         artists.name,
-        ALBUM.id,
         artists.nFan,
         true
       );
@@ -286,8 +277,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       for (let i = 0; i < albums.length; i++) {
         const ALBUM = albums[i];
         const ARTIST = artists[i];
-        console.log("duplicati => ", !DUPLICATI.includes(ALBUM.id));
-        console.log("duplicati => ", !DUPLICATI.includes(ARTIST.id));
+        // console.log("duplicati => ", !DUPLICATI.includes(ALBUM.id));
+        // console.log("duplicati => ", !DUPLICATI.includes(ARTIST.id));
         if (!DUPLICATI.includes(ALBUM.id)) {
           DUPLICATI.push(ALBUM.id);
           albumCard(
@@ -304,10 +295,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           DUPLICATI.push(ARTIST.id);
           artistCard(
             "results-artist",
-            ALBUM.id,
+            ARTIST.id,
             ARTIST.pictureSmall,
             ARTIST.name,
-            ALBUM.id,
             null,
             false
           );
