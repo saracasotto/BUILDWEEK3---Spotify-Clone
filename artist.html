@@ -177,22 +177,24 @@
     <script>
         w3.includeHTML();
     </script>
-      <script>
+     <script>
         function toggleSearch() {
-          let searchInputContainer = document.getElementById('searchInputContainer');
-          let exploreBtn = document.getElementById('exploreBtn');
-          let mainBtns = document.getElementById('main-nav-buttons');
-          let browseCards = document.getElementById('browse-cards');
-          let browseCategories = document.getElementById('browse-categories');
+            let searchInputContainer = document.getElementById('searchInputContainer');
+            let exploreBtn = document.getElementById('exploreBtn');
+            let mainBtns = document.getElementById('main-nav-buttons');
+            let browseAlbums = document.getElementById('album');
+            let browseArtists = document.getElementById('artist');
+            let browseCategories = document.getElementById('browse-categories');
     
-          searchInputContainer.classList.toggle('d-none');
-          exploreBtn.classList.toggle('d-none');
-          mainBtns.classList.toggle('d-none');
-          browseCards.classList.toggle('d-none');
-          browseCategories.classList.toggle('d-none');
+            searchInputContainer.classList.toggle('d-none');
+            exploreBtn.classList.toggle('d-none');
+            mainBtns.classList.toggle('d-none');
+            if (browseAlbums) browseAlbums.classList.toggle('d-none');
+            if (browseArtists) browseArtists.classList.toggle('d-none');
+            browseCategories.classList.toggle('d-none');
         }
+    </script>
     
-      </script>
 </body>
 
 </html>

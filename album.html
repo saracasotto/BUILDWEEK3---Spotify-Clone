@@ -54,7 +54,7 @@
                     </ul>
                 </div>
             </header>
-            <section id="album">
+            <section id="album" class="">
                 <div id="album-container" class="album-container">
                     <div class="card" id="album-card">
                         <div class="card-img-container">
@@ -197,10 +197,14 @@
             let searchInputContainer = document.getElementById('searchInputContainer');
             let exploreBtn = document.getElementById('exploreBtn');
             let mainBtns = document.getElementById('main-nav-buttons');
+            let browseAlbums = document.getElementById('album');
+            let browseCategories = document.getElementById('browse-categories');
 
             searchInputContainer.classList.toggle('d-none');
             exploreBtn.classList.toggle('d-none');
             mainBtns.classList.toggle('d-none');
+            browseAlbums.classList.toggle('d-none');
+            browseCategories.classList.toggle('d-none');
         }
 
     </script>

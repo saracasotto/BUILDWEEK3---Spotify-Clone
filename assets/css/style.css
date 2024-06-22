@@ -480,20 +480,28 @@ main #dynamic-container header div {
     background-color: #d84000;
 }
 
-#browse-results {
+#browse-results,
+#results-artist,
+#results-album {
     flex-wrap: wrap;
 }
 
-#browse-results .card-img-container {
-    padding-bottom: 200px;
-    position: relative;
-    overflow: hidden;
+#browse-results .card {
+    margin: 0.5em;
 }
-#browse-results .card-img-container img {
-    width: 200px;
-    height: 200px;
-    position: absolute;
+
+#browse-results .card-button-overlay{
+    display: none;
 }
+
+#browse-results .card-title {
+    font-size: 0.8em;
+}
+
+#browse-results .card-title:hover {
+    transform: none;
+}
+
 
 
 
@@ -802,7 +810,8 @@ audio {
     }
 
     #browse-categories .cards-container .card {
-        font-size: 1.5em;
+        font-size: 1em;
+        height: 100px;
     }
 }
 
