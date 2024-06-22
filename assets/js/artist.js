@@ -26,7 +26,7 @@ function displayArtist() {
 
                     let mostraArtista = document.getElementById('artist-container')
                     mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
-                    mostraArtista.style.backgroundSize = 'cover';
+                    mostraArtista.style.backgroundSize = 'scale';
                     mostraArtista.style.backgroundPosition = 'center';
                     mostraArtista.style.backgroundRepeat = 'no-repeat';
                     mostraArtista.innerHTML = `
