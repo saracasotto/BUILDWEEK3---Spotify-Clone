@@ -27,7 +27,7 @@ function displayArtist() {
                     let mostraArtista = document.getElementById('artist-container')
                     mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
                     mostraArtista.style.backgroundSize = 'cover';
-                    mostraArtista.style.backgroundPosition = 'top';
+                    mostraArtista.style.backgroundPosition = 'center';
                     mostraArtista.style.backgroundRepeat = 'no-repeat';
                     mostraArtista.innerHTML = `
                     <div class="card-body">

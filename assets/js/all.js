@@ -222,12 +222,16 @@ document.getElementById("searchInput").addEventListener("keyup", () => {
   console.table(albums);
   console.log("SEARCHINPUT => artist");
   console.table(artists);
-  document.getElementById("browse-categories").innerHTML = `
+  document.getElementById("browse-results").innerHTML = `
   <div id="results-artist">
     <h2>Artista</h2>
+    <div id="results-artist" class="d-flex">
+    </div>
   </div>
-  <div id="results-album">
-    <h2>Album</h2>
+  <div>
+  <h2>Album</h2>
+    <div id="results-album" class="d-flex">
+    </div>
   </div>
   `;
   // document.getElementById("results-artist").innerHTML = ``;
