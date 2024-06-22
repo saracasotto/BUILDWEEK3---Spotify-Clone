@@ -1,10 +1,10 @@
 <div class="song">
     <div id="player-album">
-        <img src="assets/images/provaimmagine.jpg" alt="Album">
+        <img id="album-image" src="" alt="Album Cover" class="d-none">
     </div>
     <div class="track-info" id="track-info">
-        <p class="player-title"></p>
-        <p class="player-artist"></p>
+        <p class="player-title" id="player-title"></p>
+        <p class="player-artist" id="player-artist"></p>
     </div>
 </div>
 <div class="controls">
@@ -15,12 +15,8 @@
         <button class="control-btn next"><i class="bi bi-skip-forward-fill"></i></button>
         <button class="control-btn repeat"><i class="bi bi-arrow-repeat"></i></button>
     </div>
-    <div class="progress-container d-flex">
-        <span class="current-time">1:20</span>
-        <div class="progress-bar">
-            <div class="progress"></div>
-        </div>
-        <span class="total-time">3:50</span>
+    <div class="player fixed-bottom bg-light">
+        <audio id="audioPlayer" controls class="w-100 "></audio>
     </div>
 </div>
 <div class="extra-controls">
@@ -33,3 +29,5 @@
     <button class="extra-btn"><i class="bi bi-pip"></i></button>
     <button class="extra-btn"><i class="bi bi-arrows-angle-expand"></i></button>
 </div>
+<script src="assets/js/album.js"></script>
+<script src="assets/js/artist.js"></script>
