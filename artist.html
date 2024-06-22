@@ -31,7 +31,7 @@
                         <button class="btn rounded-circle"><i class="bi bi-chevron-left"></i></button>
                         <button class="btn rounded-circle"><i class="bi bi-chevron-right"></i></button>
                         <div id="searchInputContainer" class="d-none p-0">
-                            <input class="form-control rounded-5" type="search" placeholder="Search"
+                            <input id="searchInput" class="form-control rounded-5" type="search" placeholder="Search"
                                 aria-label="Search">
                         </div>
                     </div>
@@ -80,17 +80,18 @@
                     </div>
                 </div>
                 <div>
-                    <table class="table d-none" id="albumTable">
+                    <table class="table" id="albumTable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Img</th>
                                 <th scope="col">Title</th>
                                 <th scope="col">Listen</th>
                                 <th scope="col">Duration</th>
                             </tr>
                         </thead>
                         <tbody id="tracks">
-
+                            
                         </tbody>
                     </table>
                 </div>

@@ -8,9 +8,7 @@ let albums = null;
 async function getArtist(id) {
   const RESPONSE = await fetch(URLARTIST + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
-  // console.log("GETARTIST => data\n", data);
   artists = {
     id: data["id"],
     name: data["name"],
@@ -20,7 +18,6 @@ async function getArtist(id) {
     pictureXl: data["picture_xl"],
     nFan: `${data["nb_fan"]}`,
   };
-  // console.log("GETARTIST => artists\n", artists));
   return true;
 }
 
@@ -32,10 +29,8 @@ async function getSearch(query) {
   if (!response.ok) {
     throw new Error("OOPS.....ERROR");
   } else {
-    // console.log("GETSEARCH => response\n", response);
   }
   const data = await response.json();
-  // console.log("GETSEARCH => data\n", data.data);
   albums = data.data.map((ALBUM) => ({
     id: `${ALBUM.album.id}`,
     cover: ALBUM.album.cover,
@@ -55,13 +50,11 @@ async function getSearch(query) {
     pictureBig: ARTIST.artist.picture_big,
     pictureXl: ARTIST.artist.picture_xl,
   }));
-  // console.log("GETSEARCH => search\n", searchs);
 }
 
 async function getAlbum(id) {
   const RESPONSE = await fetch(URLALBUM + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
   albums = {
     idAlbum: data["id"],
@@ -73,17 +66,12 @@ async function getAlbum(id) {
     artistName: data["artist"]["name"],
     idArtist: data["artist"]["id"],
   };
-  // console.log("GETARTIST => artist\n", artist);
   return true;
 }
 
 /** aside => artist */
 async function asideArtist() {
   await getSearch("a");
-  // console.log("ASIDEARTIST => album");
-  // console.table(album);
-  // console.log("ASIDEARTIST => artist");
-  // console.table(artist);
   for (let i = 0; i < 16; i++) {
     const ARTIST = artists[i];
     document.getElementById("recent-artists-aside-list").innerHTML += `
@@ -113,9 +101,12 @@ async function albumCard(
   idArtist,
   albumTitle,
   artistName,
-  cover
+  cover,
+  replace
 ) {
-  document.getElementById(idHtml).innerHTML += `
+  let innesto = "";
+  if (replace === false) innesto += `<div class="card">`;
+  innesto += `
   <div class="card-img-container">
       <a href="./album.html?id=${idAlbum}"><img src="${cover}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
@@ -131,6 +122,12 @@ async function albumCard(
       </div>
     </div>
   `;
+  if (replace === false) {
+    innesto += `</div>`;
+    document.getElementById(idHtml).innerHTML += innesto;
+  } else {
+    document.getElementById(idHtml).innerHTML = innesto;
+  }
 }
 
 async function artistCard(
@@ -138,30 +135,34 @@ async function artistCard(
   idArtist,
   picture,
   artistName,
-  idAlbum,
-  artistFan
+  artistFan,
+  replace
 ) {
-  let innesto = `
+  let innesto = "";
+  if (replace === false) innesto += `<div class="card">`;
+  innesto += `
   <div class="card-img-container">
-      <a href="./artist.html?=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
+      <a href="./artist.html?id=${idArtist}"><img src="${picture}" class="card-img-top" alt="ALBUM IMG"></a>
     </div>
     <div class="card-body">
-      <a href="./artist.html?=${idArtist}">
-        <h5 class="card-title">${artistName}</h5>
-      </a>
-      <a href="./album.html?id=${idAlbum}">
+      <a href="./artist.html?id=${idArtist}">
         <p class="card-text">${artistName}</p>
         `;
   if (artistFan !== null)
-    innesto += `
-        <p class="card-text">${artistFan} listeners</p>
+    innesto += `<p class="card-text">${artistFan} listeners</p>`;
+  innesto += `
       </a>
       <div class="card-button-overlay">
         <button class="btn">Follow</button>
       </div>
     </div>
-  `;
-  document.getElementById(idHtml).innerHTML += innesto;
+    `;
+  if (replace === false) {
+    innesto += `</div>`;
+    document.getElementById(idHtml).innerHTML += innesto;
+  } else {
+    document.getElementById(idHtml).innerHTML = innesto;
+  }
 }
 
 async function albumClick(albumCard) {
@@ -172,17 +173,7 @@ async function albumClick(albumCard) {
     idArtist = albumCard.dataset.idartist;
     localStorage.setItem("idAlbum", idAlbum);
     localStorage.setItem("idArtist", idArtist);
-    // console.log(
-    //   "ALBUMCLICK => if !== UNDEFINED => ",
-    //   albumCard !== undefined,
-    //   idAlbum,
-    //   idArtist
-    // );
   } else if (idAlbum === null || idArtist === null) {
-    // console.log(
-    //   "ALBUMCLICK => if NULL => ",
-    //   idAlbum === null && idArtist === null
-    // );
     localStorage.setItem("idAlbum", albums[0].id);
     localStorage.setItem("idArtist", artists[0].id);
     idAlbum = albums[0].id;
@@ -190,7 +181,6 @@ async function albumClick(albumCard) {
   } else {
     idAlbum = localStorage.getItem("idAlbum");
     idArtist = localStorage.getItem("idArtist");
-    // console.log("ALBUMCLICK => else localStorage => ", idAlbum, idArtist);
   }
   loadContent(idAlbum, idArtist);
 }
@@ -199,9 +189,6 @@ async function loadContent(idAlbum, idArtist) {
     const ALBUM = albums[i];
     if (ALBUM.id === idAlbum) {
       await getArtist(idArtist);
-      // console.log("LOADCONTENT => ", idAlbum, idArtist);
-      // console.log("ALBUMCLICK => artists\n", artists.id);
-      // console.log(ALBUM.title);
       collapsedTitle(ALBUM.title);
       albumCard(
         "song-card",
@@ -209,15 +196,16 @@ async function loadContent(idAlbum, idArtist) {
         artists.id,
         ALBUM.title,
         artists.name,
-        ALBUM.coverMedium
+        ALBUM.coverMedium,
+        true
       );
       artistCard(
         "artist-card",
-        ALBUM.id,
+        artists.id,
         artists.pictureMedium,
         artists.name,
-        ALBUM.id,
-        artists.nFan
+        artists.nFan,
+        true
       );
       loadPlayer(ALBUM.coverSmall, ALBUM.title, artists.name);
       break;
@@ -234,24 +222,19 @@ async function loadPlayer(img, title, artist) {
   <p class="player-artist">${artist}</p>
   `;
 }
-
-const SEARCHINPUT = document.getElementById("searchInput");
-document.getElementById("searchInput").addEventListener("keyup", async () => {
-  console.log("SEARCHINPUT => ", SEARCHINPUT.value.toLowerCase());
-  if (SEARCHINPUT.value === "") {
-    document.getElementById("browse-categories").classList.remove("d-none");
-    document.getElementById("browse-results").classList.add("d-none");
-  } else {
-    await getSearch(SEARCHINPUT.value.toLowerCase());
-    getArtist(SEARCHINPUT.value.toLowerCase());
-    // console.log("SEARCHINPUT => album");
-    // console.table(albums);
-    // console.log("SEARCHINPUT => artist");
-    // console.table(artists);
-    document.getElementById("browse-categories").classList.add("d-none");
-    const BROWSERESULT = document.getElementById("browse-results");
-    BROWSERESULT.classList.remove("d-none");
-    BROWSERESULT.innerHTML = `
+document.addEventListener("DOMContentLoaded", async () => {
+  const SEARCHINPUT = document.getElementById("searchInput");
+  document.getElementById("searchInput").addEventListener("keyup", async () => {
+    if (SEARCHINPUT.value === "") {
+      document.getElementById("browse-categories").classList.remove("d-none");
+      document.getElementById("browse-results").classList.add("d-none");
+    } else {
+      await getSearch(SEARCHINPUT.value.toLowerCase());
+      getArtist(SEARCHINPUT.value.toLowerCase());
+      document.getElementById("browse-categories").classList.add("d-none");
+      const BROWSERESULT = document.getElementById("browse-results");
+      BROWSERESULT.classList.remove("d-none");
+      BROWSERESULT.innerHTML = `
   <div>
     <h2>Artista</h2>
     <div id="results-artist" class="d-flex">
@@ -263,47 +246,34 @@ document.getElementById("searchInput").addEventListener("keyup", async () => {
     </div>
   </div>
   `;
-    for (let i = 0; i < albums.length; i++) {
-      const ALBUM = albums[i];
-      const ARTIST = artists[i];
-      // console.table(ALBUM);
-      // console.table(ARTIST);
-      albumCard(
-        "results-album",
-        ALBUM.id,
-        ARTIST.id,
-        ALBUM.title,
-        ARTIST.name,
-        ALBUM.coverSmall
-      );
-      artistCard(
-        "results-artist",
-        ALBUM.id,
-        ARTIST.pictureSmall,
-        ARTIST.name,
-        ALBUM.id,
-        null
-      );
+      const DUPLICATI = [];
+      for (let i = 0; i < albums.length; i++) {
+        const ALBUM = albums[i];
+        const ARTIST = artists[i];
+        if (!DUPLICATI.includes(ALBUM.id)) {
+          DUPLICATI.push(ALBUM.id);
+          albumCard(
+            "results-album",
+            ALBUM.id,
+            ARTIST.id,
+            ALBUM.title,
+            ARTIST.name,
+            ALBUM.coverSmall,
+            false
+          );
+        }
+        if (!DUPLICATI.includes(ARTIST.id)) {
+          DUPLICATI.push(ARTIST.id);
+          artistCard(
+            "results-artist",
+            ARTIST.id,
+            ARTIST.pictureSmall,
+            ARTIST.name,
+            null,
+            false
+          );
+        }
+      }
     }
-  }
-
-  // for (let i = 0; i < artists.length; i++) {
-  //   const ARTIST = artists[i];
-  //   document.getElementById("results-artist").innerHTML += `
-  //   <div>
-  //     <img src="${ARTIST.pictureSmall}" class="rounded-circle" alt="...">
-  //     <h5 class="card-title text-white">${ARTIST.name}</h5>
-  //     <p>Artista</p>
-  //   </div>
-  //     `;
-  // }
-  // albums.forEach((ALBUM) => {
-  //   document.getElementById("results-album").innerHTML = `
-  //   <div>
-  //     <img src="${ALBUM.coverSmall}" class="rounded-circle" alt="...">
-  //     <a href="./album.html?id=${ALBUM.id}"><h5 class="card-title text-white">${ALBUM.title}</h5></a>
-  //     <p>Album</p>
-  //   </div>
-  //     `;
-  // });
+  });
 });
