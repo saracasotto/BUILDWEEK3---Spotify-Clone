@@ -22,7 +22,7 @@ function displayArtist() {
             // console.log(response)
             response.json()
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
 
                     let mostraArtista = document.getElementById('artist-container')
                     mostraArtista.style.backgroundImage = `url(${data.picture_big})`;
@@ -34,6 +34,34 @@ function displayArtist() {
                     <h5>${data.name}</h5>
                     </div>
                     `;
+
+                    fetch("https://striveschool-api.herokuapp.com/api/deezer/album/" + id, {
+
+                    })
+                    .then(response => {
+                        // console.log(response)
+                        response.json()
+                        .then(singleTrack => {
+                            let counter = 1; 
+                            // console.log(singleTrack.tracks.data)
+                            singleTrack.tracks.data.forEach(element => {
+                                console.log(element)
+                                let tracks = document.getElementById('tracks')
+                                tracks.innerHTML += 
+                                `
+                                <td>${counter}</td>
+                                <td><img src="${element.preview}"></img></td>
+                                <td>${element.title}</td>
+                                <td>${element.rank}</td>
+                                <td>${element.duration}</td>
+                               
+                                `
+                                counter ++
+                            });
+                        })
+                    })
+
+
                 })
         })
         .catch(error => {
