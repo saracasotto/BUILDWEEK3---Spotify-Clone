@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   await asideArtist();
-  await albumCards();
+  albumCards();
+  albumClick();
 });
 
 async function albumCards() {
@@ -11,16 +12,20 @@ async function albumCards() {
       const ALBUM = albums[y];
       const ARTIST = artists[y];
       CARDSCONTAINER.innerHTML += `
-  <div id="albumCard${y}" data-idalbum="${ALBUM.id}" data-idartist="${ARTIST.id}" class="card" onclick="albumClick(this)">
+  <div class="card">
     <div class="card-img-container">
-			<a href="#"><img src="${ALBUM.coverMedium}" class="card-img-top" alt="ALBUM IMG"></a>
-      <a href="#"><img src="assets/images/playbutton.svg" class="overlay-player-btn"></a>
+			<a href="#"id="albumCard${y}" data-idalbum="${ALBUM.id}" data-idartist="${ARTIST.id}" onclick="albumClick(this)">
+        <img src="${ALBUM.coverMedium}" class="card-img-top" alt="ALBUM IMG">
+      </a>
+      <a href="#">
+        <img src="assets/images/playbutton.svg" class="overlay-player-btn">
+      </a>
 		</div>
 		<div class="card-body">
-			<a href="./album.html?idalbum=${ALBUM.id}&idartist=${ARTIST.id}">
+			<a href="./album.html?id=${ALBUM.id}">
 			  <h5 class="card-title">${ALBUM.title}</h5>
 			</a>
-			<a href="./album.html?idalbum=${ALBUM.id}&idartist=${ARTIST.id}">
+			<a href="./artist.html?id=${ARTIST.id}">
 			  <p class="card-text">${ARTIST.name}</p>
 			</a>
 		</div>
@@ -28,5 +33,3 @@ async function albumCards() {
     }
   }
 }
-
-

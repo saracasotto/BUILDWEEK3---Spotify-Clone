@@ -2,7 +2,6 @@ const URLSEARCH = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const URLARTIST = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
 const URLALBUM = "https://striveschool-api.herokuapp.com/api/deezer/album/";
 
-let searchs = null;
 let artists = null;
 let albums = null;
 
@@ -148,20 +147,43 @@ async function artistCard(idArtist, picture, artistName, idAlbum, artistFan) {
 }
 
 async function albumClick(albumCard) {
-  // && albumCard.dataset.idartist === undefined
-  let idAlbum = "";
-  let idArtist = "";
-  if (albumCard === undefined) {
-    idAlbum = new URLSearchParams(window.location.search).get("idalbum");
-    idArtist = new URLSearchParams(window.location.search).get("idartist");
+  let idAlbum = localStorage.getItem("idAlbum");
+  let idArtist = localStorage.getItem("idArtist");
+  if (albumCard !== undefined) {
+    idAlbum = albumCard.dataset.idalbum;
+    idArtist = albumCard.dataset.idartist;
+    localStorage.setItem("idAlbum", idAlbum);
+    localStorage.setItem("idArtist", idArtist);
+    // console.log(
+    //   "ALBUMCLICK => if !== UNDEFINED => ",
+    //   albumCard !== undefined,
+    //   idAlbum,
+    //   idArtist
+    // );
+  } else if (idAlbum === null || idArtist === null) {
+    // console.log(
+    //   "ALBUMCLICK => if NULL => ",
+    //   idAlbum === null && idArtist === null
+    // );
+    localStorage.setItem("idAlbum", albums[0].id);
+    localStorage.setItem("idArtist", artists[0].id);
+    idAlbum = albums[0].id;
+    idArtist = artists[0].id;
   } else {
-    localStorage.setItem("idAlbum", albumCard.dataset.idalbum);
-    localStorage.setItem("idArtist", albumCard.dataset.idartist);
+    idAlbum = localStorage.getItem("idAlbum");
+    idArtist = localStorage.getItem("idArtist");
+    // console.log("ALBUMCLICK => else localStorage => ", idAlbum, idArtist);
   }
+  loadContent(idAlbum, idArtist);
+}
+async function loadContent(idAlbum, idArtist) {
   for (let i = 0; i < albums.length; i++) {
     const ALBUM = albums[i];
-    await getArtist(localStorage.getItem("idArtist"));
-    if (ALBUM.id === localStorage.getItem("idAlbum")) {
+    if (ALBUM.id === idAlbum) {
+      await getArtist(idArtist);
+      console.log("LOADCONTENT => ", idAlbum, idArtist);
+      // console.log("ALBUMCLICK => artists\n", artists.id);
+      // console.log(ALBUM.title);
       collapsedTitle(ALBUM.title);
       songCard(
         ALBUM.id,
@@ -177,7 +199,18 @@ async function albumClick(albumCard) {
         ALBUM.id,
         artists.nFan
       );
+      loadPlayer(ALBUM.coverSmall, ALBUM.title, artists.name);
       break;
     }
   }
+}
+
+async function loadPlayer(img, title, artist) {
+  document.getElementById("player-album").innerHTML = `
+  <img src="${img}" alt="Album">
+  `;
+  document.getElementById("track-info").innerHTML = `
+  <p class="player-title">${title}</p>
+  <p class="player-artist">${artist}</p>
+  `;
 }
