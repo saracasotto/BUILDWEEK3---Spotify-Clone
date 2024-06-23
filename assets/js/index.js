@@ -30,3 +30,4 @@ async function albumCards() {
     if (i === 15) break;
   }
 }
+
