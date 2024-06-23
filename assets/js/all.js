@@ -1,3 +1,4 @@
+// Base URLs for Deezer API endpoints
 const URLSEARCH = "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 const URLARTIST = "https://striveschool-api.herokuapp.com/api/deezer/artist/";
 const URLALBUM = "https://striveschool-api.herokuapp.com/api/deezer/album/";
@@ -5,6 +6,7 @@ const URLALBUM = "https://striveschool-api.herokuapp.com/api/deezer/album/";
 let artists = null;
 let albums = null;
 
+// Function to fetch artist data by ID
 async function getArtist(id) {
   const RESPONSE = await fetch(URLARTIST + id);
   if (RESPONSE.status === 500) return false;
@@ -21,8 +23,8 @@ async function getArtist(id) {
   return true;
 }
 
-/** fetch per la ricerca dell'artista passato come parametro in ingresso
- *  prendo i dati ricevuti e mappo in un array di oggetti solo quelli che mi servono
+/** Fetches search results based on the query parameter
+ *  Maps the received data to an array of objects containing only the necessary information
  */
 async function getSearch(query) {
   const response = await fetch(URLSEARCH + query);
@@ -52,6 +54,7 @@ async function getSearch(query) {
   }));
 }
 
+// Function to fetch album data by ID
 async function getAlbum(id) {
   const RESPONSE = await fetch(URLALBUM + id);
   if (RESPONSE.status === 500) return false;
@@ -69,7 +72,7 @@ async function getAlbum(id) {
   return true;
 }
 
-/** aside => artist */
+// Function to populate the aside with artists
 async function asideArtist() {
   await getSearch("a");
   for (let i = 0; i < 16; i++) {
@@ -88,13 +91,14 @@ async function asideArtist() {
   }
 }
 
-/** collapse => album */
+//Function to update the collapsed title 
 async function collapsedTitle(title) {
   document.getElementById("collapsed-title").innerHTML = `
   <h2>${title}</h2>
   `;
 }
 
+// Function to create and insert an album card
 async function albumCard(
   idHtml,
   idAlbum,
@@ -130,6 +134,7 @@ async function albumCard(
   }
 }
 
+// Function to create and insert an artist card
 async function artistCard(
   idHtml,
   idArtist,
@@ -165,6 +170,7 @@ async function artistCard(
   }
 }
 
+// Function to handle album click events
 async function albumClick(albumCard) {
   let idAlbum = localStorage.getItem("idAlbum");
   let idArtist = localStorage.getItem("idArtist");
@@ -184,6 +190,8 @@ async function albumClick(albumCard) {
   }
   loadContent(idAlbum, idArtist);
 }
+
+// Function to load content based on album and artist IDs
 async function loadContent(idAlbum, idArtist) {
   for (let i = 0; i < albums.length; i++) {
     const ALBUM = albums[i];
@@ -213,6 +221,7 @@ async function loadContent(idAlbum, idArtist) {
   }
 }
 
+// Function to load the music player with the selected album and artist
 async function loadPlayer(img, title, artist) {
   document.getElementById("player-album").innerHTML = `
   <img src="${img}" alt="Album">
@@ -222,6 +231,8 @@ async function loadPlayer(img, title, artist) {
   <p class="player-artist">${artist}</p>
   `;
 }
+
+// Event listener for the 'DOMContentLoaded' event to initialize the search functionality
 document.addEventListener("DOMContentLoaded", async () => {
   const SEARCHINPUT = document.getElementById("searchInput");
   document.getElementById("searchInput").addEventListener("keyup", async () => {

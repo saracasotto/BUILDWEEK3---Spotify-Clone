@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 const params = new URLSearchParams(location.search);
 let id = params.get('id');
 
+// Function to generate and display artist full section
 function displayArtist() {
     fetch("https://striveschool-api.herokuapp.com/api/deezer/artist/" + id)
         .then(response => response.json())
@@ -36,7 +37,7 @@ function displayArtist() {
                                 <td>${counter}</td>
                                 <td><img src="${element.album.cover_small}" alt="${element.title} cover"></td>
                                 <td>${element.title}</td>
-                                <td><audio controls class="audio-controls">
+                                <td class="audio-controls"><audio controls class="audio-controls">
                             <source src="${element.preview}" type="audio/mp3"></audio></td>
                                 <td>${Math.floor(element.duration / 60)}:${element.duration % 60 < 10 ? "0" : ""}${element.duration % 60}</td>
                             </tr>

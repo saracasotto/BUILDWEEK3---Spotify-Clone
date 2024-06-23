@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
+
+/*GENERAL CSS RULES*/
+
 body {
     display: flex;
     background-color: black;
@@ -418,6 +421,7 @@ main #dynamic-container header div {
     opacity: 1;
     bottom: 5%;
 }
+
 /*CATEGORIES CARDS CONTAINER*/
 
 #browse-categories h2 {
@@ -425,7 +429,6 @@ main #dynamic-container header div {
     font-weight: bold;
     padding: 0 1em;
 }
-
 
 #browse-categories .cards-container {
     display: flex;
@@ -459,14 +462,12 @@ main #dynamic-container header div {
     background-color: #006450;
 }
 
-
 #browse-categories .card:nth-of-type(3),
 #browse-categories .card:nth-of-type(8),
 #browse-categories .card:nth-of-type(13),
 #browse-categories .card:nth-of-type(18) {
     background-color: #8400e7;
 }
-
 
 #browse-categories .card:nth-of-type(4),
 #browse-categories .card:nth-of-type(9),
@@ -479,6 +480,8 @@ main #dynamic-container header div {
 #browse-categories .card:nth-of-type(15) {
     background-color: #d84000;
 }
+
+/*SEARCH RESULTS CONTAINER*/
 
 #browse-results,
 #results-artist,
@@ -501,9 +504,6 @@ main #dynamic-container header div {
 #browse-results .card-title:hover {
     transform: none;
 }
-
-
-
 
 /*ALBUM PAGE*/
 
@@ -552,6 +552,11 @@ main #dynamic-container header div {
     cursor: default;
 }
 
+#album-card #card-text2 {
+    font-weight: 700;
+    font-size: 1em;
+    color: white;
+}
 
 #player-buttons img,
 #player-buttons svg {
@@ -592,7 +597,7 @@ audio {
     height: 1.8em;
 }
 
-/*MUSIC PLAYER*/
+/*MUSIC PLAYER PAGE*/
 
 #music-player {
     height: 14vh;
@@ -753,6 +758,8 @@ audio {
     text-overflow: ellipsis;
 }
 
+/*MEDIA QUERIES*/
+
 @media (max-width: 1199px) {
 
     aside {
@@ -875,10 +882,32 @@ audio {
 
     #dynamic-container section::-webkit-scrollbar,
     #dynamic-container .cards-container::-webkit-scrollbar,
-    #albumTable thead th:nth-of-type(4),
-    #albumTable tr td:nth-of-type(4) {
+    #albumTable .audio-controls,
+    #albumTable .listen{
         display: none;
     }
+    
+    #album-card {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    
+    
+    #album-card .card-body {
+        padding-left: 0;
+    }
+    
+    #album-card .card-text,
+    #album-card .card-title {
+        text-align: center;
+    }
+    
+    #album-card .card-title {
+        transition: none;
+        font-size: 1.7em;
+    }
+    
 }
 
 @media (max-width: 768px) {
