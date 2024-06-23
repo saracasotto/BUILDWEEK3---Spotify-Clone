@@ -2,7 +2,6 @@ const apiBase = "https://striveschool-api.herokuapp.com/api/deezer/album/";
 let album = null;
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
-// console.log(id);
 
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -11,14 +10,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   await getAlbum();
 });
 
-// console.log(params);
 
 async function getAlbum() {
-  // console.log(apiBase + id);
   try {
     const response = await fetch(apiBase + id);
     const data = await response.json();
-    // console.log(data);
 
     const { title, cover_xl, release_date, tracks, artist } = data;
 
@@ -29,7 +25,6 @@ async function getAlbum() {
       " · " + release_date + " · " + tracks.data.length + " tracks";
 
     let songs = "";
-    // console.log(tracks);
     tracks.data.forEach((track, i) => {
       songs += `<tr>
 
