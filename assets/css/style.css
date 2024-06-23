@@ -896,16 +896,17 @@ audio {
     
     #album-card .card-body {
         padding-left: 0;
+        text-align: center;
     }
     
     #album-card .card-text,
-    #album-card .card-title {
-        text-align: center;
+    #album-card #card-text2{
+        font-size: 0.7em;
     }
     
     #album-card .card-title {
         transition: none;
-        font-size: 1.7em;
+        font-size: 1.2em;
     }
     
 }
