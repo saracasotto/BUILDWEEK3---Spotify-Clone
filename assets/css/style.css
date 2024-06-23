@@ -891,7 +891,7 @@ audio {
     }
 
 
- /* Adjusting text size for smaller screens */
+ /* aggiustare testo per schermi piccoli */
  .card-title,
  .card-text,
  #player-buttons span,
@@ -908,5 +908,8 @@ audio {
      font-size: 0.9em;
  }
 
-
+ 
 }
+
+
+
