@@ -889,4 +889,24 @@ audio {
         flex-direction: column;
         align-items: center;
     }
+
+
+ /* Adjusting text size for smaller screens */
+ .card-title,
+ .card-text,
+ #player-buttons span,
+ #main-nav-buttons a {
+     font-size: 1.2em;
+ }
+
+ #albumTable th,
+ #albumTable td {
+     font-size: 0.7em;
+ }
+
+ .btn {
+     font-size: 0.9em;
+ }
+
+
 }
