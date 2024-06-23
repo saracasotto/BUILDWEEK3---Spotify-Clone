@@ -31,7 +31,7 @@
                         <button class="btn rounded-circle"><i class="bi bi-chevron-left"></i></button>
                         <button class="btn rounded-circle"><i class="bi bi-chevron-right"></i></button>
                         <div id="searchInputContainer" class="d-none p-0">
-                            <input class="form-control rounded-5" type="search" placeholder="Search"
+                            <input id="searchInput" class="form-control rounded-5" type="search" placeholder="Search"
                                 aria-label="Search">
                         </div>
                     </div>
@@ -52,7 +52,7 @@
                     </ul>
                 </div>
             </header>
-            <section id="album">
+            <section id="album" class="">
                 <div id="album-container" class="album-container">
                     <div class="card flex-row align-items-end" id="album-card">
                         <div class="card-img-container">
@@ -195,10 +195,14 @@
             let searchInputContainer = document.getElementById('searchInputContainer');
             let exploreBtn = document.getElementById('exploreBtn');
             let mainBtns = document.getElementById('main-nav-buttons');
+            let browseAlbums = document.getElementById('album');
+            let browseCategories = document.getElementById('browse-categories');
 
             searchInputContainer.classList.toggle('d-none');
             exploreBtn.classList.toggle('d-none');
             mainBtns.classList.toggle('d-none');
+            browseAlbums.classList.toggle('d-none');
+            browseCategories.classList.toggle('d-none');
         }
 
     </script>

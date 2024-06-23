@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 // console.log(params);
 
 async function getAlbum() {
-    // console.log(apiBase + id);
+  // console.log(apiBase + id);
   try {
     const response = await fetch(apiBase + id);
     const data = await response.json();
@@ -38,20 +38,16 @@ async function getAlbum() {
                         <p class="track-title">${track.title}</p>
                         <p class="artist-name">${track.artist.name}</p></td>
                         <td><audio controls class="audio-controls">
-                            <source src="${
-                              track.preview
-                            }" type="audio/mp3"></audio>
+                            <source src="${track.preview}" type="audio/mp3"></audio>
                         </td>
-                        <td>${Math.floor(track.duration / 60)}:${
-        track.duration % 60 < 10 ? "0" : ""
-      }${track.duration % 60}</td>
+                        <td>${Math.floor(track.duration / 60)}:${track.duration % 60 < 10 ? "0" : ""}${track.duration % 60}</td>
                     </tr>`;
-        });
+    });
 
-        
-        document.getElementById("tracks").innerHTML = songs;
 
-    } catch (error) {
-        console.error("Error fetching album data:", + error);
-    }
+    document.getElementById("tracks").innerHTML = songs;
+
+  } catch (error) {
+    console.error("Error fetching album data:", + error);
+  }
 }
