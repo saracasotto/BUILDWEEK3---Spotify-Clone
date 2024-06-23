@@ -21,7 +21,7 @@ async function getAlbum() {
 
     document.getElementById("album-cover").src = cover_xl;
     document.getElementById("card-title-album").innerText = title;
-    document.getElementById("card-text-artist").innerText = artist.name;
+    document.getElementById("card-text-artist").innerHTML = `<a href="./artist.html?id=${artist.id}">${artist.name}</a>`;
     document.getElementById("card-text2").innerText =
       " · " + release_date + " · " + tracks.data.length + " tracks";
 
