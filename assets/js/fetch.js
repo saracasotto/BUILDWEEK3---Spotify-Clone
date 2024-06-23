@@ -1,9 +1,7 @@
 async function getArtist(id) {
   const RESPONSE = await fetch(URLARTIST + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
-  // console.log("GETARTIST => data\n", data);
   artists = {
     id: data["id"],
     name: data["name"],
@@ -13,7 +11,6 @@ async function getArtist(id) {
     pictureXl: data["picture_xl"],
     nFan: data["nb_fan"],
   };
-  // console.log("GETARTIST => artist\n", artist);
   return true;
 }
 
@@ -25,10 +22,8 @@ async function getSearch(query) {
   if (!response.ok) {
     throw new Error("OOPS.....ERROR");
   } else {
-    // console.log("GETSEARCH => response\n", response);
   }
   const data = await response.json();
-  // console.log("GETSEARCH => data\n", data.data);
   albums = data.data.map((ALBUM) => ({
     id: `${ALBUM.album.id}`,
     cover: ALBUM.album.cover,
@@ -48,13 +43,11 @@ async function getSearch(query) {
     pictureBig: ARTIST.artist.picture_big,
     pictureXl: ARTIST.artist.picture_xl,
   }));
-  // console.log("GETSEARCH => search\n", searchs);
 }
 
 async function getAlbum(id) {
   const RESPONSE = await fetch(URLALBUM + id);
   if (RESPONSE.status === 500) return false;
-  //   // console.log("GETARTIST => response\n", response);
   const data = await RESPONSE.json();
   albums = {
     idAlbum: data["id"],
@@ -66,6 +59,5 @@ async function getAlbum(id) {
     artistName: data["artist"]["name"],
     idArtist: data["artist"]["id"],
   };
-  // console.log("GETARTIST => artist\n", artist);
   return true;
 }

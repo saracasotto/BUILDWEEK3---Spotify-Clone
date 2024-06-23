@@ -28,7 +28,7 @@ function displayArtist() {
                 .then(tracksData => {
                     let counter = 1;
                     let tracks = document.getElementById('tracks');
-                    tracks.innerHTML = ""; // Svuota il contenitore delle tracce
+                    tracks.innerHTML = ""; 
 
                     tracksData.data.forEach(element => {
                         tracks.innerHTML += `
