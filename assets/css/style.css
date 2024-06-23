@@ -850,3 +850,43 @@ audio {
         margin: 0;
     }
 }
+
+@media (max-width: 768px) {
+    #album-card {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    #album-card .card-img-container {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    #album-card .card-img-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    #album-card .card-body {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    #player-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #player-buttons img,
+    #player-buttons svg {
+        margin: 0.5em 0;
+    }
+
+    #recent-playlists,
+    #recent-artists-aside-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
