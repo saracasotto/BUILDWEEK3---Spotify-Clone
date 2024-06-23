@@ -18,15 +18,16 @@
 
 <body>
     <!--LEFT ASIDE-->
-    <aside w3-include-html="leftaside.html"></aside>
+    <aside w3-include-html="leftaside.html">
+    </aside>
 
     <!--MAIN CONTAINER-->
-    <main class="conteiner-fluid">
+    <main>
 
         <!--CHANGING CONTAINER-->
         <div class="container" id="dynamic-container">
-            <header class="mb-3">
-                <div class="d-flex justify-content-between align-items-center main-top-btns">
+            <header>
+                <div class="main-top-btns">
                     <div>
                         <button class="btn rounded-circle"><i class="bi bi-chevron-left"></i></button>
                         <button class="btn rounded-circle"><i class="bi bi-chevron-right"></i></button>
@@ -36,16 +37,17 @@
                         </div>
                     </div>
                     <div>
-                        <ul class="list-unstyled d-flex">>
-                            <li><button class="btn rounded-5 text-bg-light me-2" id="exploreBtn">Explore Premium</button></li>
-                            <li><button class="btn rounded-5 me-2">Install App</button></li>
-                            <li><button class="btn rounded-circle me-2"><i class="bi bi-bell"></i></button></li>
+                        <ul>
+                            <li><button class="btn rounded-5 text-bg-light" id="exploreBtn">Explore Premium</button>
+                            </li>
+                            <li><button class="btn rounded-5">Install App</button></li>
+                            <li><button class="btn rounded-circle"><i class="bi bi-bell"></i></button></li>
                             <li><button class="btn rounded-circle"><i class="bi bi-person-circle"></i></button></li>
                         </ul>
                     </div>
                 </div>
-                <div class="d-lg-none main-nav-btns mt-3">
-                    <ul class="navigation-btns list-unstyled d-flex justify-content-around" id="main-nav-buttons">
+                <div class="main-nav-btns d-lg-none">
+                    <ul class="navigation-btns" id="main-nav-buttons">
                         <li><a href="">All</a></li>
                         <li><a href="">Music</a></li>
                         <li><a href="">Podcasts</a></li>
@@ -54,7 +56,7 @@
             </header>
             <section id="album" class="">
                 <div id="album-container" class="album-container">
-                    <div class="card flex-row align-items-end" id="album-card">
+                    <div class="card" id="album-card">
                         <div class="card-img-container">
                             <a href="">
                                 <img src="" id="album-cover" class="card-img-top" alt="ALBUM IMG">
@@ -110,7 +112,7 @@
             </section>
             <section id="browse-categories" class="d-none">
                 <h2>Browse All</h2>
-                <div class="cards-container row">
+                <div class="cards-container">
                     <div class="card">
                         Pop
                     </div>
