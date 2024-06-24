@@ -91,7 +91,7 @@ async function asideArtist() {
   }
 }
 
-//Function to update the collapsed title 
+//Function to update the collapsed title
 async function collapsedTitle(title) {
   document.getElementById("collapsed-title").innerHTML = `
   <h2>${title}</h2>
@@ -215,14 +215,19 @@ async function loadContent(idAlbum, idArtist) {
         artists.nFan,
         true
       );
-      loadPlayer(ALBUM.coverMedium, ALBUM.title, artists.name);
+      await loadPlayer(
+        ALBUM.coverMedium,
+        ALBUM.title,
+        artists.name,
+        ALBUM.preview
+      );
       break;
     }
   }
 }
 
 // Function to load the music player with the selected album and artist
-async function loadPlayer(img, title, artist) {
+async function loadPlayer(img, title, artist, preview) {
   document.getElementById("player-album").innerHTML = `
   <img src="${img}" alt="Album">
   `;
@@ -230,6 +235,31 @@ async function loadPlayer(img, title, artist) {
   <p class="player-title">${title}</p>
   <p class="player-artist">${artist}</p>
   `;
+  let playButton = document.getElementById("play");
+  let track = document.getElementById("track");
+  track.setAttribute("src", preview);
+  playButton.addEventListener("click", handlePlayButton);
+  playPause(playButton, track);
+}
+
+async function playPause(playButton, track) {
+  try {
+    playButton.innerHTML = `<i class="bi bi-pause-fill"></i>`;
+    await track.play();
+  } catch (err) {
+    playButton.innerHTML = `<i class="bi bi-play-fill"></i>`;
+  }
+}
+
+function handlePlayButton() {
+  let playButton = document.getElementById("play");
+  let track = document.getElementById("track");
+  if (track.paused) {
+    playPause();
+  } else {
+    track.pause();
+    playButton.innerHTML = `<i class="bi bi-play-fill"></i>`;
+  }
 }
 
 // Event listener for the 'DOMContentLoaded' event to initialize the search functionality
@@ -288,4 +318,3 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 });
-

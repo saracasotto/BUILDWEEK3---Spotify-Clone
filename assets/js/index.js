@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   await asideArtist();
-  albumCards();
-  albumClick();
+  await albumCards();
+  await albumClick();
 });
 
 // Function to generate and display album cards
