@@ -215,7 +215,12 @@ async function loadContent(idAlbum, idArtist) {
         artists.nFan,
         true
       );
-      loadPlayer(ALBUM.coverMedium, ALBUM.title, artists.name, ALBUM.preview);
+      await loadPlayer(
+        ALBUM.coverMedium,
+        ALBUM.title,
+        artists.name,
+        ALBUM.preview
+      );
       break;
     }
   }
@@ -234,13 +239,11 @@ async function loadPlayer(img, title, artist, preview) {
   let track = document.getElementById("track");
   track.setAttribute("src", preview);
   playButton.addEventListener("click", handlePlayButton);
-  playPause();
+  playPause(playButton, track);
 }
 
-async function playPause() {
+async function playPause(playButton, track) {
   try {
-    let playButton = document.getElementById("play");
-    let track = document.getElementById("track");
     playButton.innerHTML = `<i class="bi bi-pause-fill"></i>`;
     await track.play();
   } catch (err) {
@@ -258,15 +261,6 @@ function handlePlayButton() {
     playButton.innerHTML = `<i class="bi bi-play-fill"></i>`;
   }
 }
-// function togglePlay(playButton, track) {
-//   if (track.paused) {
-//     track.play();
-//     playButton.innerHTML = `<i class="bi bi-pause-fill"></i>`;
-//   } else {
-//     track.pause();
-//     playButton.innerHTML = `<i class="bi bi-play-fill"></i>`;
-//   }
-// }
 
 // Event listener for the 'DOMContentLoaded' event to initialize the search functionality
 document.addEventListener("DOMContentLoaded", async () => {

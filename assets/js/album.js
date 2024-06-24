@@ -35,9 +35,16 @@ async function getAlbum() {
                         <p class="track-title">${track.title}</p>
                         <p class="artist-name">${track.artist.name}</p></td>
                         <td class="audio-controls"><audio controls>
-                            <source src="${track.preview}" type="audio/mp3"></audio>
+                            <source src="${
+                              track.preview
+                            }" type="audio/mp3"></audio>
                         </td>
-                        <td>${Math.floor(track.duration / 60)}:${track.duration % 60 < 10 ? "0" : ""}${track.duration % 60}</td>
+                        <td>
+                            <i class="bi bi-play-fill" onclick="loadPlayer('${track.album.cover_xl}', '${track.title}', '${track.artist.name}', '${track.preview}')"></i>
+                        </td>
+                        <td>${Math.floor(track.duration / 60)}:${
+        track.duration % 60 < 10 ? "0" : ""
+      }${track.duration % 60}</td>
                     </tr>`;
     });
 
