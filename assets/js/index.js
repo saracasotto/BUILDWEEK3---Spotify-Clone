@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   albumClick();
 });
 
+// Function to generate and display album cards
 async function albumCards() {
   for (const [i, ALBUM] of albums.entries()) {
     const CARDSCONTAINER = document.getElementById(`cardsContainer${i % 4}`);
@@ -30,3 +31,4 @@ async function albumCards() {
     if (i === 15) break;
   }
 }
+

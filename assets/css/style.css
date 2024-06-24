@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
+
+/*GENERAL CSS RULES*/
+
 body {
     display: flex;
     background-color: black;
@@ -418,6 +421,7 @@ main #dynamic-container header div {
     opacity: 1;
     bottom: 5%;
 }
+
 /*CATEGORIES CARDS CONTAINER*/
 
 #browse-categories h2 {
@@ -425,7 +429,6 @@ main #dynamic-container header div {
     font-weight: bold;
     padding: 0 1em;
 }
-
 
 #browse-categories .cards-container {
     display: flex;
@@ -459,14 +462,12 @@ main #dynamic-container header div {
     background-color: #006450;
 }
 
-
 #browse-categories .card:nth-of-type(3),
 #browse-categories .card:nth-of-type(8),
 #browse-categories .card:nth-of-type(13),
 #browse-categories .card:nth-of-type(18) {
     background-color: #8400e7;
 }
-
 
 #browse-categories .card:nth-of-type(4),
 #browse-categories .card:nth-of-type(9),
@@ -478,6 +479,30 @@ main #dynamic-container header div {
 #browse-categories .card:nth-of-type(10),
 #browse-categories .card:nth-of-type(15) {
     background-color: #d84000;
+}
+
+/*SEARCH RESULTS CONTAINER*/
+
+#browse-results,
+#results-artist,
+#results-album {
+    flex-wrap: wrap;
+}
+
+#browse-results .card {
+    margin: 0.5em;
+}
+
+#browse-results .card-button-overlay{
+    display: none;
+}
+
+#browse-results .card-title {
+    font-size: 0.8em;
+}
+
+#browse-results .card-title:hover {
+    transform: none;
 }
 
 /*ALBUM PAGE*/
@@ -527,6 +552,11 @@ main #dynamic-container header div {
     cursor: default;
 }
 
+#album-card #card-text2 {
+    font-weight: 700;
+    font-size: 1em;
+    color: white;
+}
 
 #player-buttons img,
 #player-buttons svg {
@@ -567,7 +597,7 @@ audio {
     height: 1.8em;
 }
 
-/*MUSIC PLAYER*/
+/*MUSIC PLAYER PAGE*/
 
 #music-player {
     height: 14vh;
@@ -724,8 +754,11 @@ audio {
 #artist-container .card-body h5 {
     font-size: 5em;
     font-weight: bold;
+    text-align: center;
     text-overflow: ellipsis;
 }
+
+/*MEDIA QUERIES*/
 
 @media (max-width: 1199px) {
 
@@ -736,8 +769,7 @@ audio {
     #collapse-container,
     aside .container:nth-of-type(2),
     main #dynamic-container header .main-top-btns div:nth-of-type(2),
-    main #dynamic-container header .main-top-btns button,
-    #music-player {
+    main #dynamic-container header .main-top-btns button{
         display: none;
     }
 
@@ -785,7 +817,48 @@ audio {
     }
 
     #browse-categories .cards-container .card {
-        font-size: 1.5em;
+        font-size: 1em;
+        height: 100px;
+    }
+
+}
+
+@media (min-width: 576px) and (max-width: 1199px) {
+    
+    #music-player {
+        top: 50%;
+        left: 0;
+        width: 25%;
+        flex-direction: column;
+        background-color: transparent;
+    }
+
+    #music-player .controls button {
+        font-size: 1.3em;
+    }
+
+    #music-player #player-album {
+        width: 70%;
+        margin-bottom: 1em;
+    }
+
+    .song,
+    .track-info{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin: 0;
+    }
+
+    #music-player #progress-container {
+        width: 100%;
+    }
+    .controls button.repeat,
+    .controls button.shuffle,
+    .extra-controls{
+        display: none;
     }
 }
 
@@ -808,9 +881,34 @@ audio {
     }
 
     #dynamic-container section::-webkit-scrollbar,
-    #dynamic-container .cards-container::-webkit-scrollbar {
+    #dynamic-container .cards-container::-webkit-scrollbar,
+    #albumTable .audio-controls,
+    #albumTable .listen{
         display: none;
     }
+    
+    #album-card {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+    }
+    
+    
+    #album-card .card-body {
+        padding-left: 0;
+        text-align: center;
+    }
+    
+    #album-card .card-text,
+    #album-card #card-text2{
+        font-size: 0.7em;
+    }
+    
+    #album-card .card-title {
+        transition: none;
+        font-size: 1.2em;
+    }
+    
 }
 
 @media (max-width: 768px) {
@@ -849,4 +947,23 @@ audio {
         height: 100%;
         margin: 0;
     }
+
+    #music-player {
+        bottom: 10%;
+        height: 10%;
+        justify-content: center;
+        background-color: darkred ;
+    }
+
+    .song,
+    .controls {
+        width: 50%;
+    }
+
+    .controls button.repeat,
+    .controls button.shuffle,
+    .extra-controls{
+        display: none;
+    }
+
 }

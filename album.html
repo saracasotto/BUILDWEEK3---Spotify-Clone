@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="main-nav-btns d-lg-none">
+                <div class="main-nav-btns d-none d-xl-flex">
                     <ul class="navigation-btns" id="main-nav-buttons">
                         <li><a href="">All</a></li>
                         <li><a href="">Music</a></li>
@@ -54,7 +54,7 @@
                     </ul>
                 </div>
             </header>
-            <section id="album">
+            <section id="album" class="">
                 <div id="album-container" class="album-container">
                     <div class="card" id="album-card">
                         <div class="card-img-container">
@@ -68,7 +68,7 @@
                             <a href="">
                                 <span class="card-text" id="card-text-artist"> </span>
                             </a>
-                            <span style="color: white; font-weight: 900;" id="card-text2"></span>
+                            <span id="card-text2"></span>
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Listen</th>
+                                <th scope="col" class="listen">Listen</th>
                                 <th scope="col">Duration</th>
                             </tr>
                         </thead>
@@ -197,10 +197,14 @@
             let searchInputContainer = document.getElementById('searchInputContainer');
             let exploreBtn = document.getElementById('exploreBtn');
             let mainBtns = document.getElementById('main-nav-buttons');
+            let browseAlbums = document.getElementById('album');
+            let browseCategories = document.getElementById('browse-categories');
 
             searchInputContainer.classList.toggle('d-none');
             exploreBtn.classList.toggle('d-none');
             mainBtns.classList.toggle('d-none');
+            browseAlbums.classList.toggle('d-none');
+            browseCategories.classList.toggle('d-none');
         }
 
     </script>

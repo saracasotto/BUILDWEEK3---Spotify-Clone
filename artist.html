@@ -45,7 +45,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="main-nav-btns d-lg-none">
+                <div class="main-nav-btns d-none d-xl-flex">
                     <ul class="navigation-btns" id="main-nav-buttons">
                         <li><a href="">All</a></li>
                         <li><a href="">Music</a></li>
@@ -56,7 +56,6 @@
 
             <section id="artist">
                 <div id="artist-container" class="artist-container">
-                    <!--COME SFONDO LA FOTO DELL'ARTISTA-->
                 </div>
                 <div id="player-buttons" class="d-flex justify-content-between p-2">
                     <div class="d-flex align-items-center">
@@ -81,17 +80,18 @@
                     </div>
                 </div>
                 <div>
-                    <table class="table d-none" id="albumTable">
+                    <table class="table" id="albumTable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Album</th>
                                 <th scope="col">Title</th>
-                                <th scope="col">Listen</th>
+                                <th scope="col" class="listen">Listen</th>
                                 <th scope="col">Duration</th>
                             </tr>
                         </thead>
                         <tbody id="tracks">
-
+                            
                         </tbody>
                     </table>
                 </div>
@@ -177,22 +177,24 @@
     <script>
         w3.includeHTML();
     </script>
-      <script>
+     <script>
         function toggleSearch() {
-          let searchInputContainer = document.getElementById('searchInputContainer');
-          let exploreBtn = document.getElementById('exploreBtn');
-          let mainBtns = document.getElementById('main-nav-buttons');
-          let browseCards = document.getElementById('browse-cards');
-          let browseCategories = document.getElementById('browse-categories');
+            let searchInputContainer = document.getElementById('searchInputContainer');
+            let exploreBtn = document.getElementById('exploreBtn');
+            let mainBtns = document.getElementById('main-nav-buttons');
+            let browseAlbums = document.getElementById('album');
+            let browseArtists = document.getElementById('artist');
+            let browseCategories = document.getElementById('browse-categories');
     
-          searchInputContainer.classList.toggle('d-none');
-          exploreBtn.classList.toggle('d-none');
-          mainBtns.classList.toggle('d-none');
-          browseCards.classList.toggle('d-none');
-          browseCategories.classList.toggle('d-none');
+            searchInputContainer.classList.toggle('d-none');
+            exploreBtn.classList.toggle('d-none');
+            mainBtns.classList.toggle('d-none');
+            if (browseAlbums) browseAlbums.classList.toggle('d-none');
+            if (browseArtists) browseArtists.classList.toggle('d-none');
+            browseCategories.classList.toggle('d-none');
         }
+    </script>
     
-      </script>
 </body>
 
 </html>
